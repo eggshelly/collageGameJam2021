@@ -62,7 +62,10 @@ public class GameManager : MonoBehaviour
     public static int GetNextLevel()
     {
         if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings)
+        {
+            NextLevel = 1;
             return 1;
+        }
 
         CurrentLevel = NextLevel;
         NextLevel += 1;
