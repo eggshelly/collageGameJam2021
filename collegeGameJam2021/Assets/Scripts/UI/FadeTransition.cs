@@ -34,6 +34,7 @@ public class FadeTransition : MonoBehaviour
                 c.a = 0f;
                 fadeImage.color = c;
                 state = FadeState.FadeOut;
+                fadeImage.gameObject.SetActive(false);
                 break;
             case FadeState.FadeIn:
                 StaticDelegates.UpdateAllMovement(false);
@@ -50,6 +51,7 @@ public class FadeTransition : MonoBehaviour
 
     IEnumerator FadeToBlack()
     {
+        fadeImage.gameObject.SetActive(true);
         Color c = fadeImage.color;
         c.a = 0f;
 
@@ -83,7 +85,7 @@ public class FadeTransition : MonoBehaviour
         c.a = 0f;
         fadeImage.color = c;
         state = FadeState.FadeOut;
-
+        fadeImage.gameObject.SetActive(false);
         StaticDelegates.PlaySequence(true);
     }
 
