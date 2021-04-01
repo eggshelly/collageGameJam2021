@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static int CurrentLevel;
-    static int NextLevel = 1;
+    static int NextLevel = 0;
     static GameType type;
     [SerializeField] GameType TypeOfGame;
     [SerializeField] float TimeToComplete;
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateGameState(bool start)
     {
+        timer = 0f;
         if(start && timer  == 0f)
         {
             Debug.Log("Starting Timer");
