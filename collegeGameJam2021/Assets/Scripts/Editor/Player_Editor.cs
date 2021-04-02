@@ -13,7 +13,15 @@ public class Player_Editor : Editor
 {
     public override void OnInspectorGUI()
     {
+
         serializedObject.Update();
+
+        SerializedProperty speed = serializedObject.FindProperty("speed");
+        speed.floatValue = EditorGUILayout.FloatField("Movement/Rotational Speed", speed.floatValue);
+
+        SerializedProperty actions = serializedObject.FindProperty("directionsToMove");
+        EditorGUILayout.PropertyField(actions, true);
+
 
         SerializedProperty completionType = serializedObject.FindProperty("CompleteType");
         completionType.enumValueIndex = (int)(CompletionType)EditorGUILayout.EnumPopup("Completion Type", (CompletionType)completionType.enumValueIndex);

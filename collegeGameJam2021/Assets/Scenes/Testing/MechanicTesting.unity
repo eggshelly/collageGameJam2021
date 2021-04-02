@@ -1404,11 +1404,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  directionsToMove: 00000000010000000200000003000000
+  directionsToMove: 00000000
   CompleteType: 5
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
-  TimeToHold: 0
+  TimeToHold: 10
   coll: {fileID: 0}
 --- !u!114 &1735953381
 MonoBehaviour:

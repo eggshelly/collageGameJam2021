@@ -24,7 +24,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StaticDelegates.UpdateGameState(true);
+        if(GameManager.NextLevel == 0)
+        {
+            Debug.Log("Here");
+            StaticDelegates.UpdateGameState(true);
+        }
     }
 
     private void OnDestroy()
