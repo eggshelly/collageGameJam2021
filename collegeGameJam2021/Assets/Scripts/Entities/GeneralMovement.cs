@@ -5,14 +5,25 @@ using UnityEngine;
 [System.Serializable]
 public class GeneralMovement : MonoBehaviour
 {
-    #region Rotation
-    [SerializeField] bool ShouldRotate;
-    [HideInInspector] public bool Flipped;
-    [HideInInspector] public GameObject Pivot;
-    [HideInInspector] public float EndAngle;
+    [SerializeField] MovementType TypeOfMovement;
 
+    #region Rotation
+    [SerializeField] bool Flipped;
+    [SerializeField] GameObject Pivot;
+    [SerializeField] float EndAngle;
     float originalRotation;
     #endregion
+
+
+
+    #region LookDirectional
+    [SerializeField] Actions StartingAction = Actions.None;
+    [SerializeField] float DistanceToMoveCollider;
+    #endregion
+
+    [SerializeField] bool ChangeSpriteOnMovement;
+    [SerializeField] List<Actions> actionToSprite;
+    [SerializeField] List<Sprite> spritesToUse;
 
     #region Directional
 
@@ -23,9 +34,11 @@ public class GeneralMovement : MonoBehaviour
 
     #endregion
 
+
     float speed;
     bool hitBoundary = false;
 
+    SpriteRenderer rend;
     BoxCollider2D boundary;
     Collider2D collider;
 
@@ -34,6 +47,8 @@ public class GeneralMovement : MonoBehaviour
     bool holdingLeft;
     bool holdingUp;
     bool holdingDown;
+    bool holdingSpace;
+    Actions MostRecentAction = Actions.None;
 
     private void Awake()
     {
@@ -42,15 +57,29 @@ public class GeneralMovement : MonoBehaviour
 
         boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>();
         collider = this.GetComponent<Collider2D>();
-        if(ShouldRotate)
+        rend = this.GetComponent<SpriteRenderer>();
+
+
+        CheckTypeOfMovement();
+    }
+
+    void CheckTypeOfMovement()
+    {
+        switch(TypeOfMovement)
         {
-            originalRotation = this.transform.eulerAngles.z;
-            if (Flipped)
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 180f, this.transform.eulerAngles.z);
-        }
-        else
-        {
-            SetBoundary();
+            case MovementType.RotateAroundPivot:
+                originalRotation = this.transform.eulerAngles.z;
+                if (Flipped)
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 180f, this.transform.eulerAngles.z);
+                break;
+            case MovementType.MoveDirectional:
+                SetBoundary();
+                break;
+            case MovementType.LookDirectional:
+            case MovementType.ToggleHitbox:
+                collider.enabled = false;
+                break;
+
         }
     }
 
@@ -65,17 +94,52 @@ public class GeneralMovement : MonoBehaviour
         if (!canMove)
             return;
 
-        if(ShouldRotate)
+        switch (TypeOfMovement)
         {
-            MoveRotational();
-        }
-        else
-        {
-            MoveDirectional();
+            case MovementType.RotateAroundPivot:
+                MoveRotational();
+                break;
+            case MovementType.MoveDirectional:
+                MoveDirectional();
+                break;
+            case MovementType.LookDirectional:
+                LookDirectionally();
+                break;
+            case MovementType.ToggleHitbox:
+                ToggleCollider();
+                break;
+
         }
     }
 
-    public void ToggleMovement(bool canMove)
+    public void UpdateInput(Actions action, bool released)
+    {
+        switch (action)
+        {
+            case Actions.Up:
+                holdingUp = !released;
+                break;
+            case Actions.Down:
+                holdingDown = !released;
+                break;
+            case Actions.Left:
+                holdingLeft = !released;
+                break;
+            case Actions.Right:
+                holdingRight = !released;
+                break;
+            case Actions.Select:
+                holdingSpace = !released;
+                break;
+
+        }
+
+        if (!released)
+            MostRecentAction = action;
+    }
+
+
+    void ToggleMovement(bool canMove)
     {
         this.canMove = canMove;
     }
@@ -90,26 +154,6 @@ public class GeneralMovement : MonoBehaviour
         upperBoundary = boundary.bounds.center.y + boundary.bounds.extents.y;
     }
 
-
-    public void UpdateInput(Actions action, bool released)
-    {
-        switch(action)
-        {
-            case Actions.Up:
-                holdingUp = !released;
-                break;
-            case Actions.Down:
-                holdingDown = !released;
-                break;
-            case Actions.Left:
-                holdingLeft = !released;
-                break;
-            case Actions.Right:
-                holdingRight = !released;
-                break;
-
-        }
-    }
 
     void MoveDirectional()
     {
@@ -238,6 +282,82 @@ public class GeneralMovement : MonoBehaviour
     }
 
     #endregion
+
+    #region Toggle
+
+    void ToggleCollider()
+    {
+        bool isToggling = holdingUp || holdingDown || holdingRight || holdingLeft || holdingSpace;
+
+        if(collider.enabled != isToggling)
+            collider.enabled = isToggling;
+
+        if (ChangeSpriteOnMovement && spritesToUse.Count == 2)
+            rend.sprite = spritesToUse[holdingSpace ? 1 : 0];
+
+    }
+
+    #endregion
+
+    #region Look Direction
+
+    void LookDirectionally()
+    {
+        float height, width;
+        if (MostRecentAction != Actions.None)
+            collider.enabled = true;
+
+        switch(MostRecentAction)
+        {
+            case Actions.Up:
+                height = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y);
+                width = Mathf.Min(collider.bounds.extents.x, collider.bounds.extents.y);
+
+                if((collider as BoxCollider2D) != null)
+                {
+                    (collider as BoxCollider2D).size = new Vector2(width, height);
+                }
+                collider.offset = new Vector2(0, DistanceToMoveCollider);
+
+                break;
+            case Actions.Down:
+                height = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y);
+                width = Mathf.Min(collider.bounds.extents.x, collider.bounds.extents.y);
+
+                if ((collider as BoxCollider2D) != null)
+                {
+                    (collider as BoxCollider2D).size = new Vector2(width, height);
+                }
+                collider.offset = new Vector2(0, -DistanceToMoveCollider);
+
+                break;
+            case Actions.Left:
+                height = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y);
+                width = Mathf.Min(collider.bounds.extents.x, collider.bounds.extents.y);
+
+                if ((collider as BoxCollider2D) != null)
+                {
+                    (collider as BoxCollider2D).size = new Vector2(height, width);
+                }
+                collider.offset = new Vector2(-DistanceToMoveCollider, 0);
+
+                break;
+            case Actions.Right:
+                height = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y);
+                width = Mathf.Min(collider.bounds.extents.x, collider.bounds.extents.y);
+
+                if ((collider as BoxCollider2D) != null)
+                {
+                    (collider as BoxCollider2D).size = new Vector2(height, width);
+                }
+                collider.offset = new Vector2(DistanceToMoveCollider, 0);
+
+                break;
+        }
+    }
+
+    #endregion
+
 
     public void UpdateSpeed(float newSpeed)
     {

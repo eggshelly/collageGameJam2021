@@ -22,6 +22,17 @@ public class Player_Editor : Editor
         SerializedProperty actions = serializedObject.FindProperty("directionsToMove");
         EditorGUILayout.PropertyField(actions, true);
 
+        SerializedProperty loseSprite = serializedObject.FindProperty("ChangeSpriteOnLose");
+        loseSprite.boolValue = EditorGUILayout.Toggle("Change Sprite On Loss", loseSprite.boolValue);
+
+        if(loseSprite.boolValue)
+        {
+            SerializedProperty sprite = serializedObject.FindProperty("spriteToChange");
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.ObjectField(sprite, typeof(Sprite));
+            EditorGUILayout.EndHorizontal();
+        }
+
 
         SerializedProperty completionType = serializedObject.FindProperty("CompleteType");
         completionType.enumValueIndex = (int)(CompletionType)EditorGUILayout.EnumPopup("Completion Type", (CompletionType)completionType.enumValueIndex);
@@ -41,6 +52,9 @@ public class Player_Editor : Editor
             case CompletionType.HoldToggle:
                 SerializedProperty timeToHold = serializedObject.FindProperty("TimeToHold");
                 timeToHold.floatValue = EditorGUILayout.FloatField("Time To Hold", timeToHold.floatValue);
+
+                SerializedProperty Continuous = serializedObject.FindProperty("ContinuousHold");
+                Continuous.boolValue = EditorGUILayout.Toggle("Continuous Hold", Continuous.boolValue);
                 break;
         }
 

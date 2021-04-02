@@ -4,6 +4,9 @@ using UnityEngine;
 
 public enum MovementType
 {
-    Rotation,
-    Directional
+    RotateAroundPivot,
+    MoveDirectional,
+    LookDirectional,
+    ToggleHitbox
+
 }

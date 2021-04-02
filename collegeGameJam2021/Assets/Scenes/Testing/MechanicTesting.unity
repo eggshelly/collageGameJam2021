@@ -1048,10 +1048,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1840afa251cd2f499ce28f4561fd52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShouldRotate: 1
+  TypeOfMovement: 0
   Flipped: 1
   Pivot: {fileID: 1660719928}
   EndAngle: 0
+  KeysForToggle: 
+  StartingAction: 5
+  DistanceToMoveCollider: 0
+  ChangeSpriteOnMovement: 0
+  actionToSprite: 
+  spritesToUse: []
 --- !u!114 &1578930001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,11 +1072,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   directionsToMove: 0000000001000000
+  ChangeSpriteOnLose: 0
+  spriteToChange: {fileID: 0}
   CompleteType: 0
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
   TimeToHold: 0
-  coll: {fileID: 0}
+  ContinuousHold: 0
 --- !u!61 &1578930002
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1404,12 +1412,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  directionsToMove: 00000000
-  CompleteType: 5
+  directionsToMove: 0000000003000000
+  ChangeSpriteOnLose: 0
+  spriteToChange: {fileID: 0}
+  CompleteType: 0
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
   TimeToHold: 10
-  coll: {fileID: 0}
+  ContinuousHold: 0
 --- !u!114 &1735953381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,10 +1432,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1840afa251cd2f499ce28f4561fd52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShouldRotate: 0
+  TypeOfMovement: 3
   Flipped: 0
   Pivot: {fileID: 0}
   EndAngle: 0
+  KeysForToggle: 0000000003000000
+  StartingAction: 5
+  DistanceToMoveCollider: 0.5
+  ChangeSpriteOnMovement: 0
+  actionToSprite: 
+  spritesToUse: []
 --- !u!212 &1735953382
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1490,7 +1506,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
   m_Radius: 0.1
 --- !u!1 &1808606169
@@ -1868,10 +1884,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1840afa251cd2f499ce28f4561fd52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShouldRotate: 1
+  TypeOfMovement: 0
   Flipped: 0
   Pivot: {fileID: 1808606169}
   EndAngle: 0
+  KeysForToggle: 
+  StartingAction: 5
+  DistanceToMoveCollider: 0
+  ChangeSpriteOnMovement: 0
+  actionToSprite: 
+  spritesToUse: []
 --- !u!114 &2135399345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,11 +1908,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   directionsToMove: 0000000001000000
+  ChangeSpriteOnLose: 0
+  spriteToChange: {fileID: 0}
   CompleteType: 0
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
   TimeToHold: 0
-  coll: {fileID: 0}
+  ContinuousHold: 0
 --- !u!61 &2135399346
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -9,17 +9,22 @@ public class Player : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] List<Actions> directionsToMove;
 
+    [Header("End Of Game")]
+    [SerializeField] bool ChangeSpriteOnLose;
+    [SerializeField] Sprite spriteToChange;
+
     [Header("Completion")]
     [SerializeField] CompletionType CompleteType;
 
     //For Collection and CollectThenMoveToLocation
-    [HideInInspector] public int NumItemsToCollect;
+    [SerializeField] int NumItemsToCollect;
 
     //For MoveTargetToLocation
-    [HideInInspector] public GameObject PlayerMinion;
+    [SerializeField] GameObject PlayerMinion;
 
     //For Hold For Time and HoldToggle
-    [HideInInspector] public float TimeToHold;
+    [SerializeField] float TimeToHold;
+    [SerializeField] bool ContinuousHold = false;
 
     System.Func<bool> completionFunction;
 
@@ -29,16 +34,24 @@ public class Player : MonoBehaviour
 
     GeneralMovement movement;
     Movement controls;
-
-    [SerializeField] Collider2D coll;
+    Collider2D coll;
+    SpriteRenderer rend;
 
     private void Awake()
     {
+        rend = this.GetComponent<SpriteRenderer>();
         movement = this.GetComponent<GeneralMovement>();
         this.gameObject.layer = LayerMask.NameToLayer("Player");
 
+        StaticDelegates.GameState += GameEnd;
+
         SetupControls();
         AssignCompletionFunction();
+    }
+
+    private void OnDestroy()
+    {
+        StaticDelegates.GameState -= GameEnd;
     }
 
 
@@ -61,6 +74,14 @@ public class Player : MonoBehaviour
                 completed = true;
                 StaticDelegates.UpdateGameState(false);
             }
+        }
+    }
+
+    void GameEnd(bool start)
+    {
+        if(!start && !completed && ChangeSpriteOnLose)
+        {
+            rend.sprite = spriteToChange;
         }
     }
 
@@ -97,6 +118,10 @@ public class Player : MonoBehaviour
                 case Actions.Right:
                     controls.Move.Right.started += up => movement.UpdateInput(d, false);
                     controls.Move.Right.canceled += up => movement.UpdateInput(d, true);
+                    break;
+                case Actions.Select:
+                    controls.Move.Select.started += up => movement.UpdateInput(d, false);
+                    controls.Move.Select.canceled += up => movement.UpdateInput(d, true);
                     break;
             }    
         }
@@ -197,6 +222,11 @@ public class Player : MonoBehaviour
     {
         if (MoveToLocation())
             timer += Time.deltaTime;
+        else
+        {
+            if (ContinuousHold)
+                timer = 0f;
+        }
 
         if (timer >= TimeToHold)
             return true;
