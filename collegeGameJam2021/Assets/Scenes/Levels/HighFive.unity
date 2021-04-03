@@ -455,7 +455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9662330196c365b4cb3ca1a740df18fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfGame: 0
+  levelToPlay:
+    possibleOutcome: 1
+    type: 0
+    thumbnail: {fileID: 0}
   TimeToComplete: 10
   ResultIfTimeout: 2
 --- !u!4 &309380722
