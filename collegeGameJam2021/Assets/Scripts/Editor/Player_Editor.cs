@@ -16,12 +16,14 @@ public class Player_Editor : Editor
 
         serializedObject.Update();
 
+        EditorGUILayout.LabelField("Movement", EditorStyles.boldLabel);
         SerializedProperty speed = serializedObject.FindProperty("speed");
         speed.floatValue = EditorGUILayout.FloatField("Movement/Rotational Speed", speed.floatValue);
 
         SerializedProperty actions = serializedObject.FindProperty("directionsToMove");
         EditorGUILayout.PropertyField(actions, true);
 
+        EditorGUILayout.LabelField("End Of Game", EditorStyles.boldLabel);
         SerializedProperty loseSprite = serializedObject.FindProperty("ChangeSpriteOnLose");
         loseSprite.boolValue = EditorGUILayout.Toggle("Change Sprite On Loss", loseSprite.boolValue);
 
@@ -33,7 +35,7 @@ public class Player_Editor : Editor
             EditorGUILayout.EndHorizontal();
         }
 
-
+        EditorGUILayout.LabelField("Completion", EditorStyles.boldLabel);
         SerializedProperty completionType = serializedObject.FindProperty("CompleteType");
         completionType.enumValueIndex = (int)(CompletionType)EditorGUILayout.EnumPopup("Completion Type", (CompletionType)completionType.enumValueIndex);
 

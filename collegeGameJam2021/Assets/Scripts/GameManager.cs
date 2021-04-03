@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         if(GameManager.NextLevel == 0)
         {
-            Debug.Log("Here");
             StaticDelegates.UpdateGameState(true);
         }
     }

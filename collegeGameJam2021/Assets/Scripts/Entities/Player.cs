@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     bool completed;
     float timer = 0f;
 
+    UpdateSprite spriteUpdates;
     GeneralMovement movement;
     Movement controls;
     Collider2D coll;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rend = this.GetComponent<SpriteRenderer>();
+        spriteUpdates = this.GetComponent<UpdateSprite>();
         movement = this.GetComponent<GeneralMovement>();
         this.gameObject.layer = LayerMask.NameToLayer("Player");
 
@@ -69,6 +71,9 @@ public class Player : MonoBehaviour
             {
                 if (result == ResultType.Lose)
                     result = ResultType.Win;
+
+                ResultType changedResult = spriteUpdates.CheckIfResultChanged();
+                result = changedResult == ResultType.None ? result : changedResult;
 
                 PlayerData.UpdateData(result);
                 completed = true;
@@ -106,22 +111,32 @@ public class Player : MonoBehaviour
                 case Actions.Up:
                     controls.Move.Up.started += up => movement.UpdateInput(d, false);
                     controls.Move.Up.canceled += up => movement.UpdateInput(d, true);
+                    controls.Move.Up.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
+                    controls.Move.Up.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
                     break;
                 case Actions.Down:
                     controls.Move.Down.started += up => movement.UpdateInput(d, false);
-                    controls.Move.Down.canceled += up => movement.UpdateInput(d, true);
+                    controls.Move.Down.canceled += up => movement.UpdateInput(d, true);                  
+                    controls.Move.Down.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
+                    controls.Move.Down.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
                     break;
                 case Actions.Left:
                     controls.Move.Left.started += up => movement.UpdateInput(d, false);
                     controls.Move.Left.canceled += up => movement.UpdateInput(d, true);
+                    controls.Move.Left.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
+                    controls.Move.Left.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
                     break;
                 case Actions.Right:
                     controls.Move.Right.started += up => movement.UpdateInput(d, false);
                     controls.Move.Right.canceled += up => movement.UpdateInput(d, true);
+                    controls.Move.Right.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
+                    controls.Move.Right.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
                     break;
                 case Actions.Select:
                     controls.Move.Select.started += up => movement.UpdateInput(d, false);
                     controls.Move.Select.canceled += up => movement.UpdateInput(d, true);
+                    controls.Move.Select.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
+                    controls.Move.Select.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
                     break;
             }    
         }

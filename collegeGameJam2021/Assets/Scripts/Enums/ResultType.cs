@@ -6,5 +6,6 @@ public enum ResultType
 {
     Win,
     Neutral,
-    Lose
+    Lose,
+    None
 }

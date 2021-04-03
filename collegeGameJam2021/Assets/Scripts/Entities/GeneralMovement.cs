@@ -21,10 +21,6 @@ public class GeneralMovement : MonoBehaviour
     [SerializeField] float DistanceToMoveCollider;
     #endregion
 
-    [SerializeField] bool ChangeSpriteOnMovement;
-    [SerializeField] List<Actions> actionToSprite;
-    [SerializeField] List<Sprite> spritesToUse;
-
     #region Directional
 
     float leftBoundary;
@@ -38,7 +34,6 @@ public class GeneralMovement : MonoBehaviour
     float speed;
     bool hitBoundary = false;
 
-    SpriteRenderer rend;
     BoxCollider2D boundary;
     Collider2D collider;
 
@@ -57,7 +52,6 @@ public class GeneralMovement : MonoBehaviour
 
         boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>();
         collider = this.GetComponent<Collider2D>();
-        rend = this.GetComponent<SpriteRenderer>();
 
 
         CheckTypeOfMovement();
@@ -76,6 +70,12 @@ public class GeneralMovement : MonoBehaviour
                 SetBoundary();
                 break;
             case MovementType.LookDirectional:
+                if (StartingAction == Actions.None)
+                    collider.enabled = false;
+                else
+                    MostRecentAction = StartingAction;
+                LookDirectionally();
+                break;
             case MovementType.ToggleHitbox:
                 collider.enabled = false;
                 break;
@@ -152,6 +152,8 @@ public class GeneralMovement : MonoBehaviour
         rightBoundary = boundary.bounds.center.x + boundary.bounds.extents.x;
         lowerBoundary = boundary.bounds.center.y - boundary.bounds.extents.y;
         upperBoundary = boundary.bounds.center.y + boundary.bounds.extents.y;
+
+        Debug.Log(lowerBoundary + " " + upperBoundary);
     }
 
 
@@ -222,6 +224,7 @@ public class GeneralMovement : MonoBehaviour
         }
         else
         {
+            Debug.Log(this.transform.position.ToString("F4"));
             this.transform.position += Vector3.up * ((upperBoundary - collider.bounds.extents.y) - this.transform.position.y);
             hitBoundary = true;
         }
@@ -291,9 +294,6 @@ public class GeneralMovement : MonoBehaviour
 
         if(collider.enabled != isToggling)
             collider.enabled = isToggling;
-
-        if (ChangeSpriteOnMovement && spritesToUse.Count == 2)
-            rend.sprite = spritesToUse[holdingSpace ? 1 : 0];
 
     }
 

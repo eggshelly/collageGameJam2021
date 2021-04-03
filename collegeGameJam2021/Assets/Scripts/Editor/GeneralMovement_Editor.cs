@@ -34,32 +34,12 @@ public class GeneralMovement_Editor : Editor
                 SerializedProperty DistanceToMoveCollider = serializedObject.FindProperty("DistanceToMoveCollider");
                 DistanceToMoveCollider.floatValue = EditorGUILayout.DelayedFloatField("Distance To Move Collider", DistanceToMoveCollider.floatValue);
 
-                SerializedProperty StartingAction = serializedObject.FindProperty("StartingAction");
-                StartingAction.enumValueIndex = (int)(Actions)EditorGUILayout.EnumPopup("Starting Action", (Actions)StartingAction.enumValueIndex);
+                //SerializedProperty StartingAction = serializedObject.FindProperty("StartingAction");
+                //StartingAction.enumValueIndex = (int)(Actions)EditorGUILayout.EnumPopup("Starting Action", (Actions)StartingAction.enumValueIndex);
                 break;
 
 
         }
-
-        SerializedProperty ChangeSprite = serializedObject.FindProperty("ChangeSpriteOnMovement");
-        ChangeSprite.boolValue = EditorGUILayout.Toggle("Should Change Sprite", ChangeSprite.boolValue);
-        SerializedProperty sprites = serializedObject.FindProperty("spritesToUse");
-        if (ChangeSprite.boolValue)
-        {
-            switch ((MovementType)movementType.enumValueIndex)
-            {
-                case MovementType.ToggleHitbox:
-                    break;
-                default:
-                    SerializedProperty actionToSprite = serializedObject.FindProperty("actionToSprite");
-                    EditorGUILayout.PropertyField(actionToSprite, true);
-                    break;
-
-            }
-
-            EditorGUILayout.PropertyField(sprites, true);
-        }
-
 
         serializedObject.ApplyModifiedProperties();
     }
