@@ -153,7 +153,6 @@ public class GeneralMovement : MonoBehaviour
         lowerBoundary = boundary.bounds.center.y - boundary.bounds.extents.y;
         upperBoundary = boundary.bounds.center.y + boundary.bounds.extents.y;
 
-        Debug.Log(lowerBoundary + " " + upperBoundary);
     }
 
 

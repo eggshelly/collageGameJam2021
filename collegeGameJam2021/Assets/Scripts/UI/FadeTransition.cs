@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FadeTransition : MonoBehaviour
 {
@@ -16,11 +17,15 @@ public class FadeTransition : MonoBehaviour
     private void Awake()
     {
         StaticDelegates.Fade = this.FadeOut;
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            state = FadeState.Unset;
     }
 
     private void OnDestroy()
     {
         StaticDelegates.Fade = null;
+
     }
 
 
@@ -33,7 +38,7 @@ public class FadeTransition : MonoBehaviour
                 Color c = fadeImage.color;
                 c.a = 0f;
                 fadeImage.color = c;
-                state = FadeState.FadeOut;
+                state = FadeState.FadeIn;
                 fadeImage.gameObject.SetActive(false);
                 break;
             case FadeState.FadeIn:
@@ -71,6 +76,7 @@ public class FadeTransition : MonoBehaviour
 
     IEnumerator FadeFromBlack()
     {
+        Debug.Log("Fading");
         Color c = fadeImage.color;
         c.a = 1f;
         fadeImage.color = c;

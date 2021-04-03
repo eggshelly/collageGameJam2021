@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
 {
     static int CurrentLevel;
     static int NextLevel = 0;
-    static GameType type;
+
+    static bool loadedFromGallery = false;
 
     static ResultType finalResult;
+    static Level level;
 
-    [SerializeField] GameType TypeOfGame;
+    [SerializeField] Level levelToPlay;
     [SerializeField] float TimeToComplete;
     [SerializeField] ResultType ResultIfTimeout = ResultType.Lose;
 
@@ -22,7 +24,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         StaticDelegates.GameState += this.UpdateGameState;
-        type = TypeOfGame;
+
+        level = levelToPlay;
     }
 
     private void Start()
@@ -67,10 +70,13 @@ public class GameManager : MonoBehaviour
 
     public static int GetNextLevel()
     {
-        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings)
+        if (loadedFromGallery)
+            return 0;
+
+        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings - 1)
         {
-            NextLevel = 1;
-            return 1;
+            NextLevel = 0;
+            return 0;
         }
 
         CurrentLevel = NextLevel;
@@ -81,8 +87,14 @@ public class GameManager : MonoBehaviour
     public static void GameFinished(ResultType result)
     {
         finalResult = result;
-        PlayerData.UpdateData(result);
+        PlayerData.UpdateData(result, level);
         StaticDelegates.UpdateGameState(false);
+    }
+
+    public static void ResetVariables()
+    {
+        NextLevel = 0;
+        FromGallery(false);
     }
 
     public static ResultType GetFinalResult()
@@ -95,8 +107,14 @@ public class GameManager : MonoBehaviour
         return CurrentLevel;
     }
 
-    public static GameType GetTypeOfGame()
+    public static void FromGallery(bool b)
     {
-        return type;
+        loadedFromGallery = b;
     }
+
+    public static bool IsFromGallery()
+    {
+        return loadedFromGallery;
+    }
+
 }

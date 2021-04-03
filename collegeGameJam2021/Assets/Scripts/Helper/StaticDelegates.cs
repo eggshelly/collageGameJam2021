@@ -20,12 +20,13 @@ public class StaticDelegates
 
     public static void UpdateGameState(bool start)
     {
+        if (start)
+            Debug.Log("Starting");
+        else
+            Debug.Log("Finishing");
+
         if(GameState != null)
         {
-            if (start)
-                Debug.Log("STARTING");
-            else
-                Debug.Log("GAME FINISHED");
 
             UpdateAllMovement(start);
 
@@ -63,4 +64,11 @@ public class StaticDelegates
     {
         SceneManager.LoadScene(GameManager.GetNextLevel());
     }
+
+    public static void PlaySpecificLevel(int index)
+    {
+        GameManager.FromGallery(true);
+        SceneManager.LoadScene(index);
+    }
+
 }
