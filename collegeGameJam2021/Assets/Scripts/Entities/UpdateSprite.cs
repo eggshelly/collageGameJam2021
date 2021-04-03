@@ -8,7 +8,7 @@ public class UpdateSprite : MonoBehaviour
     [SerializeField] List<SpriteToCollider> spritesToUse;
 
     [SerializeField] bool ShouldChangeResult;
-    [SerializeField] ResultType ChangedResult;
+    [SerializeField] ResultType ChangedResult = ResultType.None;
 
     //Cycling through sprites
     [SerializeField] Actions ActionToCycle;
@@ -31,6 +31,7 @@ public class UpdateSprite : MonoBehaviour
     private void Awake()
     {
         StaticDelegates.UpdateMovement += ToggleMovement;
+        StaticDelegates.ChangeSprite += UpdateCurrentSprite;
 
         rend = this.GetComponent<SpriteRenderer>();
     }
@@ -38,6 +39,7 @@ public class UpdateSprite : MonoBehaviour
     private void OnDestroy()
     {
         StaticDelegates.UpdateMovement -= ToggleMovement;
+        StaticDelegates.ChangeSprite -= UpdateCurrentSprite;
     }
 
     void ToggleMovement(bool canMove)
@@ -45,7 +47,7 @@ public class UpdateSprite : MonoBehaviour
         this.canMove = canMove;
     }
 
-    public void UpdateCurrentSprite(Actions action, bool released, System.Action<Collider2D> callback)
+    void UpdateCurrentSprite(Actions action, bool released, System.Action<Collider2D, ResultType> callback)
     {
         if (spritesToUse.Count == 0 || !canMove)
             return;
@@ -70,14 +72,14 @@ public class UpdateSprite : MonoBehaviour
         }
     }
 
-    void CycleSprite(System.Action<Collider2D> callback)
+    void CycleSprite(System.Action<Collider2D, ResultType> callback)
     {
         currentSpriteIndex = (currentSpriteIndex + 1) % spritesToUse.Count;
         rend.sprite = spritesToUse[currentSpriteIndex].GetSprite();
         SetCollider(callback, currentSpriteIndex);
     }
 
-    void UpdateSpriteOnKey(Actions action, System.Action<Collider2D> callback)
+    void UpdateSpriteOnKey(Actions action, System.Action<Collider2D, ResultType> callback)
     {
         for(int i = 0; i < actionsToMap.Count; ++i)
         {
@@ -89,7 +91,7 @@ public class UpdateSprite : MonoBehaviour
         }
     }
 
-    void UpdateSpriteOnKeyWithIdle(Actions action, bool released, System.Action<Collider2D> callback)
+    void UpdateSpriteOnKeyWithIdle(Actions action, bool released, System.Action<Collider2D, ResultType> callback)
     {
         if (released)
         {
@@ -116,16 +118,16 @@ public class UpdateSprite : MonoBehaviour
         
     }
 
-    void SetCollider(System.Action<Collider2D> callback, int index)
+    void SetCollider(System.Action<Collider2D, ResultType> callback, int index)
     {
 
         if (spritesToUse[index].GetCollider() != null)
         {
-            callback(spritesToUse[index].GetCollider());
+            callback(spritesToUse[index].GetCollider(), ChangedResult);
         }
     }
 
-    void ToggleSprite(bool released, System.Action<Collider2D> callback)
+    void ToggleSprite(bool released, System.Action<Collider2D, ResultType> callback)
     {
         if (spritesToUse.Count < 2)
             return;

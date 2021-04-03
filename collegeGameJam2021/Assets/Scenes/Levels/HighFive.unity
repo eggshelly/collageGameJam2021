@@ -1076,6 +1076,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpdateType: 0
   spritesToUse:
+  - sprite: {fileID: 21300000, guid: d3d6e35de3c5ce243a5a41ca5bcf3a83, type: 3}
+    collider: {fileID: 980721854}
   - sprite: {fileID: 21300000, guid: be9834f715a036c49ba136652523ae20, type: 3}
     collider: {fileID: 1529741307}
   - sprite: {fileID: 21300000, guid: e396bb8ecb9e4894a940ea8c844a8f2e, type: 3}

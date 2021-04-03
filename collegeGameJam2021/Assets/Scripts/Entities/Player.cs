@@ -28,14 +28,12 @@ public class Player : MonoBehaviour
     ResultType result = ResultType.Lose;
     float timer = 0f;
 
-    UpdateSprite spriteUpdates;
     GeneralMovement movement;
     Movement controls;
     Collider2D coll;
 
     private void Awake()
     {
-        spriteUpdates = this.GetComponent<UpdateSprite>();
         movement = this.GetComponent<GeneralMovement>();
         this.gameObject.layer = LayerMask.NameToLayer("Player");
 
@@ -59,10 +57,6 @@ public class Player : MonoBehaviour
             {
                 if (result == ResultType.Lose)
                     result = ResultType.Win;
-
-                ResultType changedResult = spriteUpdates.CheckIfResultChanged();
-                result = changedResult == ResultType.None ? result : changedResult;
-
                 GameManager.GameFinished(result);
             }
         }
@@ -90,40 +84,42 @@ public class Player : MonoBehaviour
                 case Actions.Up:
                     controls.Move.Up.started += up => movement.UpdateInput(d, false);
                     controls.Move.Up.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Up.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
-                    controls.Move.Up.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
+                    controls.Move.Up.started += up => StaticDelegates.InvokeChangeSprite(d, false, SetCollider);
+                    controls.Move.Up.canceled += up => StaticDelegates.InvokeChangeSprite(d, true, SetCollider);
                     break;
                 case Actions.Down:
                     controls.Move.Down.started += up => movement.UpdateInput(d, false);
                     controls.Move.Down.canceled += up => movement.UpdateInput(d, true);                  
-                    controls.Move.Down.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
-                    controls.Move.Down.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
+                    controls.Move.Down.started += up => StaticDelegates.InvokeChangeSprite(d, false, SetCollider);
+                    controls.Move.Down.canceled += up => StaticDelegates.InvokeChangeSprite(d, true, SetCollider);
                     break;
                 case Actions.Left:
                     controls.Move.Left.started += up => movement.UpdateInput(d, false);
                     controls.Move.Left.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Left.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
-                    controls.Move.Left.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
+                    controls.Move.Left.started += up => StaticDelegates.InvokeChangeSprite(d, false, SetCollider);
+                    controls.Move.Left.canceled += up => StaticDelegates.InvokeChangeSprite(d, true, SetCollider);
                     break;
                 case Actions.Right:
                     controls.Move.Right.started += up => movement.UpdateInput(d, false);
                     controls.Move.Right.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Right.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
-                    controls.Move.Right.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
+                    controls.Move.Right.started += up => StaticDelegates.InvokeChangeSprite(d, false, SetCollider);
+                    controls.Move.Right.canceled += up => StaticDelegates.InvokeChangeSprite(d, true, SetCollider);
                     break;
                 case Actions.Select:
                     controls.Move.Select.started += up => movement.UpdateInput(d, false);
                     controls.Move.Select.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Select.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
-                    controls.Move.Select.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
+                    controls.Move.Select.started += up => StaticDelegates.InvokeChangeSprite(d, false, SetCollider);
+                    controls.Move.Select.canceled += up => StaticDelegates.InvokeChangeSprite(d, true, SetCollider);
                     break;
             }    
         }
     }
 
-    void SetCollider(Collider2D coll)
+    void SetCollider(Collider2D coll, ResultType newResult)
     {
         this.coll = coll;
+
+        result = newResult == ResultType.None ? result : newResult;
     }
 
     void AssignCompletionFunction()

@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class StaticDelegates
 {
+    public delegate void InputKey(Actions action, bool released, System.Action<Collider2D, ResultType> callback);
+    public static InputKey ChangeSprite;
+
+    public static void InvokeChangeSprite(Actions action, bool released, System.Action<Collider2D, ResultType> callback)
+    {
+        if (ChangeSprite != null)
+            ChangeSprite.Invoke(action, released, callback);
+    }
+
 
     public delegate void Toggle(bool b);
     public static Toggle UpdateMovement;
