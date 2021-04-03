@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     static int CurrentLevel;
     static int NextLevel = 0;
     static GameType type;
+
+    static ResultType finalResult;
+
     [SerializeField] GameType TypeOfGame;
     [SerializeField] float TimeToComplete;
     [SerializeField] ResultType ResultIfTimeout = ResultType.Lose;
@@ -58,8 +61,7 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        PlayerData.UpdateData(ResultIfTimeout);
-        StaticDelegates.UpdateGameState(false);
+        GameFinished(ResultIfTimeout);
     }
 
 
@@ -74,6 +76,18 @@ public class GameManager : MonoBehaviour
         CurrentLevel = NextLevel;
         NextLevel += 1;
         return NextLevel;
+    }
+
+    public static void GameFinished(ResultType result)
+    {
+        finalResult = result;
+        PlayerData.UpdateData(result);
+        StaticDelegates.UpdateGameState(false);
+    }
+
+    public static ResultType GetFinalResult()
+    {
+        return finalResult;
     }
 
     public static int GetCurrentLevel()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class UpdateSprite : MonoBehaviour
 {
     [SerializeField] UpdateSpriteType UpdateType;
-    [SerializeField] List<Sprite> spritesToUse;
+    [SerializeField] List<SpriteToCollider> spritesToUse;
 
     [SerializeField] bool ShouldChangeResult;
     [SerializeField] ResultType ChangedResult;
@@ -45,7 +45,7 @@ public class UpdateSprite : MonoBehaviour
         this.canMove = canMove;
     }
 
-    public void UpdateCurrentSprite(Actions action, bool released)
+    public void UpdateCurrentSprite(Actions action, bool released, System.Action<Collider2D> callback)
     {
         if (spritesToUse.Count == 0 || !canMove)
             return;
@@ -53,39 +53,43 @@ public class UpdateSprite : MonoBehaviour
         {
             case UpdateSpriteType.Cycle:
                 if (!released && action == ActionToCycle)
-                    CycleSprite();
+                    CycleSprite(callback);
                 break;
             case UpdateSpriteType.UpdateOnCertainKeys:
                 if (!released)
-                    UpdateSpriteOnKey(action);
+                    UpdateSpriteOnKey(action, callback);
                 break;
             case UpdateSpriteType.UpdateOnCertainKeysWithIdle:
-                UpdateSpriteOnKeyWithIdle(action, released);
+                UpdateSpriteOnKeyWithIdle(action, released, callback);
                 break;
             case UpdateSpriteType.Toggle:
                 if(action == ActionToToggle)
-                    ToggleSprite(released);
+                    ToggleSprite(released, callback);
                 break;
 
         }
     }
 
-    void CycleSprite()
+    void CycleSprite(System.Action<Collider2D> callback)
     {
         currentSpriteIndex = (currentSpriteIndex + 1) % spritesToUse.Count;
-        rend.sprite = spritesToUse[currentSpriteIndex];
+        rend.sprite = spritesToUse[currentSpriteIndex].GetSprite();
+        SetCollider(callback, currentSpriteIndex);
     }
 
-    void UpdateSpriteOnKey(Actions action)
+    void UpdateSpriteOnKey(Actions action, System.Action<Collider2D> callback)
     {
         for(int i = 0; i < actionsToMap.Count; ++i)
         {
             if (actionsToMap[i] == action)
-                rend.sprite = spritesToUse[i];
+            {
+                rend.sprite = spritesToUse[i].GetSprite();
+                SetCollider(callback, i);
+            }
         }
     }
 
-    void UpdateSpriteOnKeyWithIdle(Actions action, bool released)
+    void UpdateSpriteOnKeyWithIdle(Actions action, bool released, System.Action<Collider2D> callback)
     {
         if (released)
         {
@@ -93,31 +97,46 @@ public class UpdateSprite : MonoBehaviour
                 actionsStarted.Remove(action);
 
             if (actionsStarted.Count == 0)
-                rend.sprite = spritesToUse[spritesToUse.Count - 1];
+            {
+                rend.sprite = spritesToUse[spritesToUse.Count - 1].GetSprite();
+                SetCollider(callback, spritesToUse.Count - 1);
+            }
             else
-                rend.sprite = spritesToUse[actionsToMap.IndexOf(actionsStarted[actionsStarted.Count - 1])];
+            {
+                rend.sprite = spritesToUse[actionsToMap.IndexOf(actionsStarted[actionsStarted.Count - 1])].GetSprite();
+                SetCollider(callback, actionsToMap.IndexOf(actionsStarted[actionsStarted.Count - 1]));
+            }
         }
         else
         {
             actionsStarted.Add(action);
-            rend.sprite = spritesToUse[actionsToMap.IndexOf(action)];
+            rend.sprite = spritesToUse[actionsToMap.IndexOf(action)].GetSprite();
+            SetCollider(callback, actionsToMap.IndexOf(action));
         }
         
     }
 
-    void ToggleSprite(bool released)
+    void SetCollider(System.Action<Collider2D> callback, int index)
     {
-        Debug.Log(released);
+
+        if (spritesToUse[index].GetCollider() != null)
+        {
+            callback(spritesToUse[index].GetCollider());
+        }
+    }
+
+    void ToggleSprite(bool released, System.Action<Collider2D> callback)
+    {
         if (spritesToUse.Count < 2)
             return;
 
         if(released)
         {
-            rend.sprite = spritesToUse[0];
+            rend.sprite = spritesToUse[0].GetSprite();
         }
         else
         {
-            rend.sprite = spritesToUse[1];
+            rend.sprite = spritesToUse[1].GetSprite();
         }
     }
 

@@ -23,17 +23,6 @@ public class Player_Editor : Editor
         SerializedProperty actions = serializedObject.FindProperty("directionsToMove");
         EditorGUILayout.PropertyField(actions, true);
 
-        EditorGUILayout.LabelField("End Of Game", EditorStyles.boldLabel);
-        SerializedProperty loseSprite = serializedObject.FindProperty("ChangeSpriteOnLose");
-        loseSprite.boolValue = EditorGUILayout.Toggle("Change Sprite On Loss", loseSprite.boolValue);
-
-        if(loseSprite.boolValue)
-        {
-            SerializedProperty sprite = serializedObject.FindProperty("spriteToChange");
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.ObjectField(sprite, typeof(Sprite));
-            EditorGUILayout.EndHorizontal();
-        }
 
         EditorGUILayout.LabelField("Completion", EditorStyles.boldLabel);
         SerializedProperty completionType = serializedObject.FindProperty("CompleteType");

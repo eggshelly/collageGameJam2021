@@ -9,9 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] List<Actions> directionsToMove;
 
-    [Header("End Of Game")]
-    [SerializeField] bool ChangeSpriteOnLose;
-    [SerializeField] Sprite spriteToChange;
 
     [Header("Completion")]
     [SerializeField] CompletionType CompleteType;
@@ -29,31 +26,22 @@ public class Player : MonoBehaviour
     System.Func<bool> completionFunction;
 
     ResultType result = ResultType.Lose;
-    bool completed;
     float timer = 0f;
 
     UpdateSprite spriteUpdates;
     GeneralMovement movement;
     Movement controls;
     Collider2D coll;
-    SpriteRenderer rend;
 
     private void Awake()
     {
-        rend = this.GetComponent<SpriteRenderer>();
         spriteUpdates = this.GetComponent<UpdateSprite>();
         movement = this.GetComponent<GeneralMovement>();
         this.gameObject.layer = LayerMask.NameToLayer("Player");
 
-        StaticDelegates.GameState += GameEnd;
 
         SetupControls();
         AssignCompletionFunction();
-    }
-
-    private void OnDestroy()
-    {
-        StaticDelegates.GameState -= GameEnd;
     }
 
 
@@ -75,20 +63,11 @@ public class Player : MonoBehaviour
                 ResultType changedResult = spriteUpdates.CheckIfResultChanged();
                 result = changedResult == ResultType.None ? result : changedResult;
 
-                PlayerData.UpdateData(result);
-                completed = true;
-                StaticDelegates.UpdateGameState(false);
+                GameManager.GameFinished(result);
             }
         }
     }
 
-    void GameEnd(bool start)
-    {
-        if(!start && !completed && ChangeSpriteOnLose)
-        {
-            rend.sprite = spriteToChange;
-        }
-    }
 
     private void OnEnable()
     {
@@ -111,35 +90,40 @@ public class Player : MonoBehaviour
                 case Actions.Up:
                     controls.Move.Up.started += up => movement.UpdateInput(d, false);
                     controls.Move.Up.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Up.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
-                    controls.Move.Up.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
+                    controls.Move.Up.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
+                    controls.Move.Up.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
                     break;
                 case Actions.Down:
                     controls.Move.Down.started += up => movement.UpdateInput(d, false);
                     controls.Move.Down.canceled += up => movement.UpdateInput(d, true);                  
-                    controls.Move.Down.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
-                    controls.Move.Down.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
+                    controls.Move.Down.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
+                    controls.Move.Down.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
                     break;
                 case Actions.Left:
                     controls.Move.Left.started += up => movement.UpdateInput(d, false);
                     controls.Move.Left.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Left.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
-                    controls.Move.Left.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
+                    controls.Move.Left.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
+                    controls.Move.Left.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
                     break;
                 case Actions.Right:
                     controls.Move.Right.started += up => movement.UpdateInput(d, false);
                     controls.Move.Right.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Right.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
-                    controls.Move.Right.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
+                    controls.Move.Right.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
+                    controls.Move.Right.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
                     break;
                 case Actions.Select:
                     controls.Move.Select.started += up => movement.UpdateInput(d, false);
                     controls.Move.Select.canceled += up => movement.UpdateInput(d, true);
-                    controls.Move.Select.started += up => spriteUpdates.UpdateCurrentSprite(d, false);
-                    controls.Move.Select.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true);
+                    controls.Move.Select.started += up => spriteUpdates.UpdateCurrentSprite(d, false, SetCollider);
+                    controls.Move.Select.canceled += up => spriteUpdates.UpdateCurrentSprite(d, true, SetCollider);
                     break;
             }    
         }
+    }
+
+    void SetCollider(Collider2D coll)
+    {
+        this.coll = coll;
     }
 
     void AssignCompletionFunction()
@@ -180,7 +164,7 @@ public class Player : MonoBehaviour
         if (coll.enabled == false)
             return false;
 
-        Collider2D loc = Physics2D.OverlapBox(coll.gameObject.transform.position, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
+        Collider2D loc = Physics2D.OverlapBox(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
         if (loc != null)
         {
             result = loc.GetComponent<EndLocation>().GetResult();
@@ -219,7 +203,7 @@ public class Player : MonoBehaviour
             return false;
 
 
-        Collider2D c = Physics2D.OverlapBox(coll.gameObject.transform.position, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("Item")));
+        Collider2D c = Physics2D.OverlapBox(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("Item")));
         if (c != null)
         {
             c.gameObject.transform.parent = this.gameObject.transform;
