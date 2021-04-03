@@ -177,8 +177,13 @@ public class Player : MonoBehaviour
     #region Completion Functions
     bool MoveToLocation()
     {
-        if(Physics2D.OverlapBox(coll.gameObject.transform.position, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("CorrectLocation"))) != null)
+        if (coll.enabled == false)
+            return false;
+
+        Collider2D loc = Physics2D.OverlapBox(coll.gameObject.transform.position, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
+        if (loc != null)
         {
+            result = loc.GetComponent<EndLocation>().GetResult();
             return true;
         }
         return false;
@@ -186,7 +191,11 @@ public class Player : MonoBehaviour
 
     bool MoveToCorrectLocation()
     {
-        Collider2D[] colls = Physics2D.OverlapBoxAll(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("CorrectLocation")) | (1 << LayerMask.NameToLayer("WrongLocation")));
+        if (coll.enabled == false)
+            return false;
+
+
+        Collider2D[] colls = Physics2D.OverlapBoxAll(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
         if (colls.Length > 0)
         {
             Collider2D closest = colls[0];
@@ -198,8 +207,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (closest.gameObject.layer == LayerMask.NameToLayer("WrongLocation"))
-                result = ResultType.Neutral;
+            result = closest.GetComponent<EndLocation>().GetResult();
             return true;
         }
         return false;
@@ -207,6 +215,10 @@ public class Player : MonoBehaviour
 
     bool Collection()
     {
+        if (coll.enabled == false)
+            return false;
+
+
         Collider2D c = Physics2D.OverlapBox(coll.gameObject.transform.position, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("Item")));
         if (c != null)
         {

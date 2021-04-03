@@ -1409,10 +1409,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  directionsToMove: 00000000010000000300000002000000
+  directionsToMove: 04000000
   ChangeSpriteOnLose: 0
   spriteToChange: {fileID: 0}
-  CompleteType: 0
+  CompleteType: 6
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
   TimeToHold: 10
@@ -1499,7 +1499,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.42}
   serializedVersion: 2
   m_Radius: 0.1
 --- !u!114 &1735953384
@@ -1514,13 +1514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7016ed8d52c014594291dfa2a6ccee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateType: 2
+  UpdateType: 3
   spritesToUse:
-  - {fileID: 21300000, guid: 7cdf60e095194764eb864ae1d9adcdb9, type: 3}
-  - {fileID: 21300000, guid: 9c312272cea695e4087bdb4ad42ee980, type: 3}
-  - {fileID: 21300000, guid: be9834f715a036c49ba136652523ae20, type: 3}
-  - {fileID: 21300000, guid: 3cc089ebc5e29ca41bcd85cebb55326b, type: 3}
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 9c312272cea695e4087bdb4ad42ee980, type: 3}
   ShouldChangeResult: 0
   ChangedResult: 0
   ActionToCycle: 4

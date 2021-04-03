@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TypeOfGame: 0
-  TimeToComplete: 5
+  TimeToComplete: 10
   ResultIfTimeout: 2
 --- !u!4 &309380722
 Transform:
@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 980721858}
   - component: {fileID: 980721857}
   - component: {fileID: 980721856}
+  - component: {fileID: 980721859}
   - component: {fileID: 980721855}
   - component: {fileID: 980721854}
   m_Layer: 0
@@ -853,7 +854,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 1
 --- !u!212 &980721855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -894,8 +895,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d3d6e35de3c5ce243a5a41ca5bcf3a83, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -918,12 +919,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  directionsToMove: 00000000010000000200000003000000
+  directionsToMove: 0000000001000000020000000300000004000000
+  ChangeSpriteOnLose: 1
+  spriteToChange: {fileID: 21300000, guid: 3cc089ebc5e29ca41bcd85cebb55326b, type: 3}
   CompleteType: 0
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
   TimeToHold: 0
-  coll: {fileID: 0}
+  ContinuousHold: 0
 --- !u!114 &980721857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,10 +939,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1840afa251cd2f499ce28f4561fd52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShouldRotate: 0
+  TypeOfMovement: 1
   Flipped: 0
   Pivot: {fileID: 0}
   EndAngle: 0
+  StartingAction: 5
+  DistanceToMoveCollider: 0
 --- !u!4 &980721858
 Transform:
   m_ObjectHideFlags: 0
@@ -948,13 +953,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980721853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4, y: -1.8, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -3.45, y: 0.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2081594533}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &980721859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980721853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7016ed8d52c014594291dfa2a6ccee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpdateType: 0
+  spritesToUse:
+  - {fileID: 21300000, guid: d3d6e35de3c5ce243a5a41ca5bcf3a83, type: 3}
+  - {fileID: 21300000, guid: be9834f715a036c49ba136652523ae20, type: 3}
+  - {fileID: 21300000, guid: 01dbf8fbe63c79b4285ad23769a3f305, type: 3}
+  ShouldChangeResult: 1
+  ChangedResult: 1
+  ActionToCycle: 4
+  actionsToMap: 
+  ActionToToggle: 0
 --- !u!1 &1002423271
 GameObject:
   m_ObjectHideFlags: 0
