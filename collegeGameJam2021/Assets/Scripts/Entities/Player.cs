@@ -156,7 +156,9 @@ public class Player : MonoBehaviour
 
     void SetCollider(Collider2D coll, ResultType newResult)
     {
+        this.coll.enabled = false;
         this.coll = coll;
+        this.coll.enabled = true;
 
         result = newResult == ResultType.None ? result : newResult;
     }
