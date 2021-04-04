@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         if (loadedFromGallery)
             return 0;
 
-        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings - 1)
+        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings)
         {
             NextLevel = 0;
             return 0;
@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
     {
         finalResult = finalResult == ResultType.None ? result : (ResultType)Mathf.Min((int)finalResult, (int)result);
 
-        Debug.Log("FINAL RESULT: " + finalResult.ToString());
         PlayerData.UpdateData(result, level);
         StaticDelegates.UpdateGameState(false);
     }

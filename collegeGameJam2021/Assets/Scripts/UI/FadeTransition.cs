@@ -10,8 +10,9 @@ public class FadeTransition : MonoBehaviour
 
     [Header("Canvas Variables")]
     [SerializeField] Image fadeImage;
-
-    float DelayBeforeBlack = 1f;
+    
+    [Header("Other")]
+    [SerializeField] float DelayBeforeBlack = 1f;
 
 
     float fadeSpeed = 4f;

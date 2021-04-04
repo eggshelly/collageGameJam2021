@@ -35,7 +35,7 @@ public class GalleryLevelUI : MonoBehaviour
         else
         {
             levelNumber.gameObject.SetActive(true);
-            levelName.text = level.levelNumber < 10 ? string.Format("#0{0}", level.levelNumber) : string.Format("#{0}", level.levelNumber);
+            levelNumber.text = level.levelNumber < 10 ? string.Format("#0{0}", level.levelNumber) : string.Format("#{0}", level.levelNumber);
             levelName.text = level.name;
             thumbnail.gameObject.SetActive(true);
             thumbnail.sprite = level.thumbnail;
