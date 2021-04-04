@@ -116,6 +116,33 @@ public class @Movement : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Navigation"",
+            ""id"": ""20484062-2692-4d68-a7f0-a29d00d8e6e3"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""12ea3c48-4800-4a9e-a71f-022ba031157e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ec68b925-38dd-4cb9-a509-818bc54b3f00"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -127,6 +154,9 @@ public class @Movement : IInputActionCollection, IDisposable
         m_Move_Left = m_Move.FindAction("Left", throwIfNotFound: true);
         m_Move_Right = m_Move.FindAction("Right", throwIfNotFound: true);
         m_Move_Select = m_Move.FindAction("Select", throwIfNotFound: true);
+        // Navigation
+        m_Navigation = asset.FindActionMap("Navigation", throwIfNotFound: true);
+        m_Navigation_Escape = m_Navigation.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -237,6 +267,39 @@ public class @Movement : IInputActionCollection, IDisposable
         }
     }
     public MoveActions @Move => new MoveActions(this);
+
+    // Navigation
+    private readonly InputActionMap m_Navigation;
+    private INavigationActions m_NavigationActionsCallbackInterface;
+    private readonly InputAction m_Navigation_Escape;
+    public struct NavigationActions
+    {
+        private @Movement m_Wrapper;
+        public NavigationActions(@Movement wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_Navigation_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_Navigation; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NavigationActions set) { return set.Get(); }
+        public void SetCallbacks(INavigationActions instance)
+        {
+            if (m_Wrapper.m_NavigationActionsCallbackInterface != null)
+            {
+                @Escape.started -= m_Wrapper.m_NavigationActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_NavigationActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_NavigationActionsCallbackInterface.OnEscape;
+            }
+            m_Wrapper.m_NavigationActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
+            }
+        }
+    }
+    public NavigationActions @Navigation => new NavigationActions(this);
     public interface IMoveActions
     {
         void OnUp(InputAction.CallbackContext context);
@@ -244,5 +307,9 @@ public class @Movement : IInputActionCollection, IDisposable
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface INavigationActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

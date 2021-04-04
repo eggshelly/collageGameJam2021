@@ -2014,7 +2014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7016ed8d52c014594291dfa2a6ccee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpdateType: 6
+  UpdateType: 3
   spritesToUse:
   - sprite: {fileID: 0}
     collider: {fileID: 0}

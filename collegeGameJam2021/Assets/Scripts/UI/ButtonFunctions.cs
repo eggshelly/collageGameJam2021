@@ -8,5 +8,6 @@ public class ButtonFunctions : MonoBehaviour
     {
         StaticDelegates.FadeOut();
         GameManager.ResetVariables();
+        PlayerData.NewRun();
     }
 }
