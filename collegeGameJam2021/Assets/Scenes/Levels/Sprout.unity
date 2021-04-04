@@ -228,7 +228,7 @@ RectTransform:
   m_Children:
   - {fileID: 399036603}
   m_Father: {fileID: 1366311231}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -578,9 +578,8 @@ GameObject:
   - component: {fileID: 1149201125}
   - component: {fileID: 1149201124}
   - component: {fileID: 1149201123}
-  - component: {fileID: 1149201122}
   - component: {fileID: 1149201121}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Watering Can
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,19 +607,6 @@ MonoBehaviour:
   ActionToCycle: 0
   actionsToMap: 
   ActionToToggle: 0
---- !u!114 &1149201122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149201120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9870e69506a8d845921f7a4e3815bc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resultType: 1
 --- !u!61 &1149201123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -937,8 +923,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1811001745}
-  - {fileID: 309317761}
   - {fileID: 1900872555}
+  - {fileID: 309317761}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1016,7 +1002,7 @@ MonoBehaviour:
     possibleOutcome: 0
     type: 0
     thumbnail: {fileID: 0}
-  TimeToComplete: 10
+  TimeToComplete: 8
   ResultIfTimeout: 2
 --- !u!4 &1594892245
 Transform:
@@ -1122,7 +1108,7 @@ GameObject:
   - component: {fileID: 1735953382}
   - component: {fileID: 1735953383}
   m_Layer: 0
-  m_Name: ConstructionPlayer
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,7 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   directionsToMove: 00000000010000000200000003000000
-  CompleteType: 3
+  CompleteType: 11
   NumItemsToCollect: 1
   PlayerMinion: {fileID: 0}
   TimeToHold: 8
@@ -1166,7 +1152,7 @@ MonoBehaviour:
   - threshold: 3
     result: 1
   - threshold: 6
-    result: 1
+    result: 0
   TimesToPress: 4
   field: {fileID: 0}
   output: 
@@ -1418,7 +1404,7 @@ RectTransform:
   - {fileID: 1005355473}
   - {fileID: 1517418664}
   m_Father: {fileID: 1366311231}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1478,8 +1464,8 @@ Camera:
   m_GameObject: {fileID: 2130831743}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
