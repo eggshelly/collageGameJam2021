@@ -30,6 +30,11 @@ public class Results : MonoBehaviour
         StaticDelegates.GameState -= StartResults;
     }
 
+    private void OnDisable()
+    {
+        controls.Move.Disable();
+    }
+
     void SetupControls()
     {
         controls.Move.Select.started += start => NextPanel();
@@ -45,7 +50,7 @@ public class Results : MonoBehaviour
         }
         else
         {
-            controls.Move.Enable();
+            controls.Move.Disable();
         }
     }
 

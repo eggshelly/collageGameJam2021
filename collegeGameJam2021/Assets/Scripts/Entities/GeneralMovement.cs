@@ -36,6 +36,7 @@ public class GeneralMovement : MonoBehaviour
 
     BoxCollider2D boundary;
     Collider2D collider;
+    Rigidbody2D rb;
 
     bool canMove = true;
     bool holdingRight;
@@ -51,6 +52,7 @@ public class GeneralMovement : MonoBehaviour
 
 
         boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>();
+        boundary.gameObject.SetActive(false);
         collider = this.GetComponent<Collider2D>();
 
 
@@ -59,6 +61,19 @@ public class GeneralMovement : MonoBehaviour
 
     void CheckTypeOfMovement()
     {
+        switch(TypeOfMovement)
+        {
+            case MovementType.MoveDirectional:
+                rb = this.GetComponent<Rigidbody2D>();
+                if (rb == null)
+                {
+                    rb = this.gameObject.AddComponent<Rigidbody2D>();
+                }
+                rb.gravityScale = 0f;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                break;
+        }
+
         switch(TypeOfMovement)
         {
             case MovementType.RotateAroundPivot:
@@ -142,6 +157,11 @@ public class GeneralMovement : MonoBehaviour
     void ToggleMovement(bool canMove)
     {
         this.canMove = canMove;
+
+        if (!canMove && rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     #region 4 Directional Movement
@@ -158,25 +178,57 @@ public class GeneralMovement : MonoBehaviour
 
     void MoveDirectional()
     {
+        if(holdingLeft && !holdingRight)
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+        }
+        else if(holdingRight && !holdingLeft)
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+        if (holdingUp && !holdingDown)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, speed);
+        }
+        else if (holdingDown && !holdingUp)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -speed);
+        }
+        else
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+
+        /*
         if (holdingLeft)
         {
-            MoveLeft();
+            //MoveLeft();
+        }
+        else
+        {
+            if(!holdingRight)
+                
         }
 
         if (holdingRight)
         {
-            MoveRight();
+            //MoveRight();
         }
 
         if (holdingDown)
         {
-            MoveDown();
+            //MoveDown();
         }
 
         if (holdingUp)
         {
-            MoveUp();
-        }
+            //MoveUp();
+        }*/
     }
 
     public void MoveLeft()
@@ -190,7 +242,7 @@ public class GeneralMovement : MonoBehaviour
         }
         else
         {
-            this.transform.position += Vector3.right * ((leftBoundary + collider.bounds.extents.x) - this.transform.position.x);
+            this.transform.position += Vector3.right * ((leftBoundary + collider.bounds.extents.x) - collider.bounds.center.x);
             hitBoundary = true;
         }
     }
@@ -207,7 +259,7 @@ public class GeneralMovement : MonoBehaviour
         }
         else
         {
-            this.transform.position += Vector3.right * ((rightBoundary - collider.bounds.extents.x) - this.transform.position.x);
+            this.transform.position += Vector3.right * ((rightBoundary - collider.bounds.extents.x) - collider.bounds.center.x);
             hitBoundary = true;
         }
     }
@@ -223,8 +275,7 @@ public class GeneralMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log(this.transform.position.ToString("F4"));
-            this.transform.position += Vector3.up * ((upperBoundary - collider.bounds.extents.y) - this.transform.position.y);
+            this.transform.position += Vector3.up * ((upperBoundary - collider.bounds.extents.y) - collider.bounds.center.y);
             hitBoundary = true;
         }
     }
@@ -239,7 +290,7 @@ public class GeneralMovement : MonoBehaviour
         }
         else
         {
-            this.transform.position += Vector3.up * ((lowerBoundary + collider.bounds.extents.y) - this.transform.position.y);
+            this.transform.position += Vector3.up * ((lowerBoundary + collider.bounds.extents.y) - collider.bounds.center.y);
             hitBoundary = true;
         }
 

@@ -152,11 +152,14 @@ public class UpdateSprite : MonoBehaviour
         if(released)
         {
             rend.sprite = spritesToUse[0].GetSprite();
+            SetCollider(callback, 0);
         }
         else
         {
             rend.sprite = spritesToUse[1].GetSprite();
+            SetCollider(callback, 1);
         }
+
     }
 
     void OnEvent()

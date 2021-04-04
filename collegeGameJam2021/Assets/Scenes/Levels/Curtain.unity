@@ -815,6 +815,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &858150856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858150858}
+  - component: {fileID: 858150857}
+  m_Layer: 0
+  m_Name: OtherCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &858150857
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858150856}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.2, y: 0.2}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &858150858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858150856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.08, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 980721858}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &980721853
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,10 +908,10 @@ MonoBehaviour:
   UpdateType: 3
   spritesToUse:
   - sprite: {fileID: 21300000, guid: e6fff9323f26f444abadc9bf4da991f3, type: 3}
-    collider: {fileID: 0}
+    collider: {fileID: 980721859}
   - sprite: {fileID: 21300000, guid: e09e0459f4f4b234791ca314e7225e9f, type: 3}
-    collider: {fileID: 0}
-  ShouldChangeResult: 1
+    collider: {fileID: 858150857}
+  ShouldChangeResult: 0
   ChangedResult: 0
   ActionToCycle: 0
   actionsToMap: 
@@ -923,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  directionsToMove: 
+  directionsToMove: 04000000
   CompleteType: 6
   NumItemsToCollect: 0
   PlayerMinion: {fileID: 0}
@@ -951,7 +1008,7 @@ MonoBehaviour:
   Pivot: {fileID: 0}
   EndAngle: 0
   StartingAction: 5
-  DistanceToMoveCollider: 0
+  DistanceToMoveCollider: 3
 --- !u!4 &980721858
 Transform:
   m_ObjectHideFlags: 0
@@ -962,7 +1019,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6534, y: 0.6534, z: 0.6534}
-  m_Children: []
+  m_Children:
+  - {fileID: 858150858}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1433,7 +1491,6 @@ GameObject:
   - component: {fileID: 1765367802}
   - component: {fileID: 1765367801}
   - component: {fileID: 1765367804}
-  - component: {fileID: 1765367803}
   m_Layer: 0
   m_Name: Curtain
   m_TagString: Untagged
@@ -1506,32 +1563,6 @@ Transform:
   m_Father: {fileID: 1141419683}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1765367803
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765367800}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -5.452706, y: -0.7190387}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 27.3125, y: 15.421875}
-    newSize: {x: 27.3125, y: 15.421875}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6.18077, y: 1.9998484}
-  m_EdgeRadius: 0
 --- !u!114 &1765367804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1706,6 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1764602938}
+  DelayBeforeBlack: 1
 --- !u!1 &2069771363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1792,7 @@ MonoBehaviour:
   ChangedResult: 3
   ActionToCycle: 4
   actionsToMap: 
-  ActionToToggle: 0
+  ActionToToggle: 4
 --- !u!212 &2069771366
 SpriteRenderer:
   m_ObjectHideFlags: 0
