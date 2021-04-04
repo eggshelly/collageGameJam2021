@@ -11,6 +11,8 @@ public class FadeTransition : MonoBehaviour
     [Header("Canvas Variables")]
     [SerializeField] Image fadeImage;
 
+    float DelayBeforeBlack = 1f;
+
 
     float fadeSpeed = 4f;
 
@@ -56,6 +58,8 @@ public class FadeTransition : MonoBehaviour
 
     IEnumerator FadeToBlack()
     {
+        yield return new WaitForSeconds(DelayBeforeBlack);
+
         fadeImage.gameObject.SetActive(true);
         Color c = fadeImage.color;
         c.a = 0f;

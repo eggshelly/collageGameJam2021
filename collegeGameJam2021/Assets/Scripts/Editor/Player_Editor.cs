@@ -54,6 +54,10 @@ public class Player_Editor : Editor
                 HoldForTime();
                 EventTrigger();
                 break;
+            case CompletionType.MoveToLocationsAndSelect:
+                PressNumTimes();
+                break;
+
         }
 
         serializedObject.ApplyModifiedProperties();

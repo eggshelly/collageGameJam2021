@@ -22,8 +22,8 @@ public class UpdateSprite_Editor : Editor
         switch ((UpdateSpriteType)UpdateType.enumValueIndex)
         {
             case UpdateSpriteType.None:
-                break;
             case UpdateSpriteType.OnEvent:
+            case UpdateSpriteType.DirectChange:
                 break;
             default:
                 switch ((UpdateSpriteType)UpdateType.enumValueIndex)

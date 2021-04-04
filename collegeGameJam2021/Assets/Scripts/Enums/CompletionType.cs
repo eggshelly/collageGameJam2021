@@ -16,6 +16,7 @@ public enum CompletionType
     PressKeyMultipleTimes,
     MoveToLocationAndHoldKey,
     MoveToLocationAndSelect,
-    CollectToLocationAndHold
+    CollectToLocationAndHold,
+    MoveToLocationsAndSelect
 }
 

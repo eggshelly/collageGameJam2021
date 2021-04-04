@@ -175,5 +175,14 @@ public class UpdateSprite : MonoBehaviour
         return ResultType.None;
     }
 
+    public void ChangeSpriteAndRemove()
+    {
+        if (spritesToUse.Count == 0)
+            return;
+
+        rend.sprite = spritesToUse[0].GetSprite();
+        this.gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
 
 }

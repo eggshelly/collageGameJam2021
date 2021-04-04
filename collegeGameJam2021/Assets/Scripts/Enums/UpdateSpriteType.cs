@@ -9,5 +9,6 @@ public enum UpdateSpriteType
     UpdateOnCertainKeysWithIdle,  //only different is there will be a default sprite that it will return to if no keys are pressed
     Toggle, //binary on or off
     OnEvent,
+    DirectChange,
     None
 }

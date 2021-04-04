@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     public static void GameFinished(ResultType result)
     {
-        finalResult = finalResult == ResultType.None ? result : finalResult;
+        finalResult = finalResult == ResultType.None ? result : (ResultType)Mathf.Min((int)finalResult, (int)result);
 
         Debug.Log("FINAL RESULT: " + finalResult.ToString());
         PlayerData.UpdateData(result, level);

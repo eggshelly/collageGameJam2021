@@ -188,6 +188,10 @@ public class Player : MonoBehaviour
                 coll = this.GetComponent<Collider2D>();
                 completionFunction = this.CollectToLocationAndHold;
                 break;
+            case CompletionType.MoveToLocationsAndSelect:
+                coll = this.GetComponent<Collider2D>();
+                completionFunction = MoveToLocationsAndSelect;
+                break;
 
         }
     }
@@ -307,7 +311,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        Debug.Log(timer);
         if (timer >= TimeToHold)
             return true;
         return false;
@@ -339,6 +342,29 @@ public class Player : MonoBehaviour
     bool CollectToLocationAndHold()
     {
         return Collection() && MoveToLocationAndHold();
+    }
+
+
+    bool MoveToLocationsAndSelect()
+    {
+        if (coll.enabled == false)
+            return false;
+
+        Collider2D loc = Physics2D.OverlapBox(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
+        if (loc != null)
+        {
+            if(loc.GetComponent<UpdateSprite>() != null && SelectKeyPressed)
+            {
+                loc.GetComponent<UpdateSprite>().ChangeSpriteAndRemove();
+                SelectKeyPressed = false;
+                counter += 1;
+                GameManager.UpdateFinalResult(ResultType.Neutral);
+            }
+        }
+
+        if (counter >= TimesToPress)
+            return true;
+        return false;
     }
 
 
