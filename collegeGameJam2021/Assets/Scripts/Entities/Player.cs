@@ -131,10 +131,20 @@ public class Player : MonoBehaviour
             }    
         }
 
-        if(ShouldTriggerEvent)
+        switch(CompleteType)
         {
-            controls.Move.Select.started += up => UpdateSelectKeyState(false);
-            controls.Move.Select.canceled += up => UpdateSelectKeyState(true);
+            case CompletionType.MoveToLocationsAndSelect:
+            case CompletionType.MoveToLocationAndSelect:
+                controls.Move.Select.started += up => UpdateSelectKeyState(false);
+                controls.Move.Select.canceled += up => UpdateSelectKeyState(true);
+                break;
+            default:
+                if(ShouldTriggerEvent)
+                {
+                    goto case CompletionType.MoveToLocationAndSelect;
+                }
+                break;
+
         }
     }
 
