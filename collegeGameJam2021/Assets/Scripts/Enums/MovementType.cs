@@ -7,6 +7,7 @@ public enum MovementType
     RotateAroundPivot,
     MoveDirectional,
     LookDirectional,
-    ToggleHitbox
+    ToggleHitbox,
+    InPlace
 
 }

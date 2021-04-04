@@ -34,17 +34,34 @@ public class UpdateSprite : MonoBehaviour
         StaticDelegates.ChangeSprite += UpdateCurrentSprite;
 
         rend = this.GetComponent<SpriteRenderer>();
+
+        ToggleListeners(true);
     }
 
     private void OnDestroy()
     {
         StaticDelegates.UpdateMovement -= ToggleMovement;
         StaticDelegates.ChangeSprite -= UpdateCurrentSprite;
+
+        ToggleListeners(false);
     }
 
     void ToggleMovement(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    void ToggleListeners(bool awake)
+    {
+        switch(UpdateType)
+        {
+            case UpdateSpriteType.OnEvent:
+                if (awake)
+                    StaticDelegates.TriggerEvent += this.OnEvent;
+                else
+                    StaticDelegates.TriggerEvent -= this.OnEvent;
+                break;
+        }
     }
 
     void UpdateCurrentSprite(Actions action, bool released, System.Action<Collider2D, ResultType> callback)
@@ -139,6 +156,15 @@ public class UpdateSprite : MonoBehaviour
         else
         {
             rend.sprite = spritesToUse[1].GetSprite();
+        }
+    }
+
+    void OnEvent()
+    {
+        if(currentSpriteIndex < spritesToUse.Count)
+        {
+            rend.sprite = spritesToUse[currentSpriteIndex].GetSprite();
+            currentSpriteIndex += 1;
         }
     }
 

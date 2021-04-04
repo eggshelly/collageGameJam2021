@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     static bool loadedFromGallery = false;
 
-    static ResultType finalResult;
+    static ResultType finalResult = ResultType.None;
     static Level level;
 
     [SerializeField] Level levelToPlay;
@@ -86,9 +86,16 @@ public class GameManager : MonoBehaviour
 
     public static void GameFinished(ResultType result)
     {
-        finalResult = result;
+        finalResult = finalResult == ResultType.None ? result : finalResult;
+
+        Debug.Log("FINAL RESULT: " + finalResult.ToString());
         PlayerData.UpdateData(result, level);
         StaticDelegates.UpdateGameState(false);
+    }
+
+    public static void UpdateFinalResult(ResultType result)
+    {
+        finalResult = result;
     }
 
     public static void ResetVariables()

@@ -23,10 +23,21 @@ public class Player : MonoBehaviour
     [SerializeField] float TimeToHold;
     [SerializeField] bool ContinuousHold = false;
 
+    //For MoveToLocationAndHoldKey
+    [SerializeField] bool ShouldTriggerEvent;
+    [SerializeField] List<ThresholdToResult> eventSlots;
+
+    //PressKeyMultipleTimes
+    [SerializeField] int TimesToPress;
+
+    bool SelectKeyPressed = false;
+
     System.Func<bool> completionFunction;
 
     ResultType result = ResultType.Lose;
     float timer = 0f;
+    float eventTimer = 0f;
+    int counter = 0;
 
     GeneralMovement movement;
     Movement controls;
@@ -113,7 +124,19 @@ public class Player : MonoBehaviour
                     break;
             }    
         }
+
+        if(ShouldTriggerEvent)
+        {
+            controls.Move.Select.started += up => UpdateSelectKeyState(false);
+            controls.Move.Select.canceled += up => UpdateSelectKeyState(true);
+        }
     }
+
+    void UpdateSelectKeyState(bool released)
+    {
+        SelectKeyPressed = !released;
+    }
+
 
     void SetCollider(Collider2D coll, ResultType newResult)
     {
@@ -149,6 +172,21 @@ public class Player : MonoBehaviour
             case CompletionType.HoldToggle:
                 coll = this.GetComponent<Collider2D>();
                 completionFunction = this.HoldForTime;
+                break;
+            case CompletionType.MoveToLocationAndSelect:
+                coll = this.GetComponent<Collider2D>();
+                completionFunction = this.MoveToLocationAndSelect;
+                break;
+            case CompletionType.MoveToLocationAndHoldKey:
+                coll = this.GetComponent<Collider2D>();
+                completionFunction = this.MoveToLocationAndHold;
+                break;
+            case CompletionType.PressKeyMultipleTimes:
+                completionFunction = this.PressKeyMultipleTimes;
+                break;
+            case CompletionType.CollectToLocationAndHold:
+                coll = this.GetComponent<Collider2D>();
+                completionFunction = this.CollectToLocationAndHold;
                 break;
 
         }
@@ -240,6 +278,68 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    bool MoveToLocationAndSelect()
+    {
+        return MoveToLocation() && SelectKeyPressed;
+    }
+
+    bool MoveToLocationAndHold()
+    {
+        if(MoveToLocation())
+        {
+            if(SelectKeyPressed)
+            {
+                timer += Time.deltaTime;
+                eventTimer += Time.deltaTime;
+                
+                if(ShouldTriggerEvent && eventSlots.Count > 0 && Mathf.FloorToInt(eventTimer) >= eventSlots[0].GetThreshold())
+                {
+                    StaticDelegates.InvokeTriggerEvent();
+
+                    switch(eventSlots[0].GetResult())
+                    {
+                        case ResultType.Neutral:
+                            GameManager.UpdateFinalResult(ResultType.Neutral);
+                            break;
+                    }
+
+                    eventSlots.RemoveAt(0);
+                }
+            }
+        }
+        Debug.Log(timer);
+        if (timer >= TimeToHold)
+            return true;
+        return false;
+    }
+
+    bool PressKeyMultipleTimes()
+    {
+        if(SelectKeyPressed)
+        {
+            counter += 1;
+            SelectKeyPressed = false;
+            if(ShouldTriggerEvent && eventSlots.Count > 0 && counter >= eventSlots[0].GetThreshold())
+            {
+                StaticDelegates.InvokeTriggerEvent();
+
+                switch (eventSlots[0].GetResult())
+                {
+                    case ResultType.Neutral:
+                        GameManager.UpdateFinalResult(ResultType.Neutral);
+                        break;
+                }
+            }
+        }
+        if (counter >= TimesToPress)
+            return true;
+        return false;
+    }
+
+    bool CollectToLocationAndHold()
+    {
+        return Collection() && MoveToLocationAndHold();
+    }
 
 
     #endregion

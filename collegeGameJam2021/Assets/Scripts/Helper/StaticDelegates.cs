@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class StaticDelegates
 {
+    public delegate void ChangeOnEvent();
+    public static ChangeOnEvent TriggerEvent;
+
+    public static void InvokeTriggerEvent()
+    {
+        if (TriggerEvent != null)
+            TriggerEvent.Invoke();
+    }
+
     public delegate void InputKey(Actions action, bool released, System.Action<Collider2D, ResultType> callback);
     public static InputKey ChangeSprite;
 
