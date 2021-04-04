@@ -12,11 +12,11 @@ public enum CompletionType
     HoldForTime,
     HoldToggle,
     InputSequence,
-    Typing,
     PressKeyMultipleTimes,
     MoveToLocationAndHoldKey,
     MoveToLocationAndSelect,
     CollectToLocationAndHold,
-    MoveToLocationsAndSelect
+    MoveToLocationsAndSelect,
+    MatchOutput
 }
 

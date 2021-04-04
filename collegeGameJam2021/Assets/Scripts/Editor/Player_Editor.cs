@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 
 #if UNITY_EDITOR
@@ -57,6 +59,9 @@ public class Player_Editor : Editor
             case CompletionType.MoveToLocationsAndSelect:
                 PressNumTimes();
                 break;
+            case CompletionType.MatchOutput:
+                InputFieldOutput();
+                break;
 
         }
 
@@ -100,6 +105,15 @@ public class Player_Editor : Editor
     {
         SerializedProperty numTimes = serializedObject.FindProperty("TimesToPress");
         numTimes.intValue = EditorGUILayout.DelayedIntField("Times To Press", numTimes.intValue);
+    }
+
+    void InputFieldOutput()
+    {
+        SerializedProperty field = serializedObject.FindProperty("field");
+        field.objectReferenceValue = EditorGUILayout.ObjectField("Text Field", field.objectReferenceValue, typeof(TMP_InputField), true) as TMP_InputField;
+
+        SerializedProperty output = serializedObject.FindProperty("output");
+        output.stringValue = EditorGUILayout.DelayedTextField("Correct output", output.stringValue);
     }
 }
 

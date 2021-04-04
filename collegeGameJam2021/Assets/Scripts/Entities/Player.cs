@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class Player : MonoBehaviour
@@ -29,6 +31,10 @@ public class Player : MonoBehaviour
 
     //PressKeyMultipleTimes
     [SerializeField] int TimesToPress;
+
+    //Match Output
+    [SerializeField] TMP_InputField field;
+    [SerializeField] string output;
 
     bool SelectKeyPressed = false;
 
@@ -191,6 +197,9 @@ public class Player : MonoBehaviour
             case CompletionType.MoveToLocationsAndSelect:
                 coll = this.GetComponent<Collider2D>();
                 completionFunction = MoveToLocationsAndSelect;
+                break;
+            case CompletionType.MatchOutput:
+                completionFunction = this.MatchOutput;
                 break;
 
         }
@@ -367,6 +376,21 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    bool MatchOutput()
+    {
+        if(!field.isFocused)
+        {
+            field.Select();
+            field.ActivateInputField();
+        }
+
+        if (field.text == output)
+        {
+            field.interactable = false;
+            return true;
+        }
+        return false;
+    }
 
     #endregion
 }
