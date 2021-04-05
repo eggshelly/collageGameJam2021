@@ -1053,9 +1053,10 @@ MonoBehaviour:
   ContinuousHold: 0
   ShouldTriggerEvent: 0
   eventSlots: []
-  TimesToPress: 0
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!114 &980721857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1144,7 +1145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCollisionClip: {fileID: 8300000, guid: f1dc748f13123c542b4bc320b4f1460e, type: 3}
-  onSpriteSwitchClip: {fileID: 0}
+  onSpriteSwitchClip: {fileID: 8300000, guid: 53449d92038f5c546a4575a750e5ac12, type: 3}
   result: 0
 --- !u!82 &980721862
 AudioSource:

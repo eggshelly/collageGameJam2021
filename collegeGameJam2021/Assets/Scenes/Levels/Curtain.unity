@@ -440,8 +440,12 @@ MonoBehaviour:
     possibleOutcome: 0
     type: 0
     thumbnail: {fileID: 21300000, guid: 4257f738550cf374482508a22b7d24ec, type: 3}
-  isLevelJunction: 0
-  levelsToLoad: []
+  isLevelJunction: 1
+  levelsToLoad:
+  - result: 0
+    levelToLoad: 14
+  - result: 2
+    levelToLoad: 14
   TimeToComplete: 12
   ResultIfTimeout: 2
 --- !u!4 &309380722
@@ -990,9 +994,10 @@ MonoBehaviour:
   ContinuousHold: 1
   ShouldTriggerEvent: 0
   eventSlots: []
-  TimesToPress: 0
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!114 &980721857
 MonoBehaviour:
   m_ObjectHideFlags: 0
