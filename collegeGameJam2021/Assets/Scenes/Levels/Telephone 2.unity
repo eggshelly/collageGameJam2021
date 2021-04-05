@@ -518,7 +518,7 @@ MonoBehaviour:
   levelsToLoad:
   - result: 0
     levelToLoad: 13
-  - result: 0
+  - result: 2
     levelToLoad: 13
   - result: 1
     levelToLoad: 13
