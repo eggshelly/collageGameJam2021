@@ -24,6 +24,16 @@ public class StaticDelegates
             ChangeSprite.Invoke(action, released, callback);
     }
 
+    public static Toggle Audio;
+
+    public static void PlayAudio(bool isCollision)
+    {
+        if(Audio != null)
+        {
+            Audio.Invoke(isCollision);
+        }
+    }
+
 
     public delegate void Toggle(bool b);
     public static Toggle UpdateMovement;

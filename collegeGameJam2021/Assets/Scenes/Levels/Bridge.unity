@@ -1279,16 +1279,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpdateType: 2
   spritesToUse:
-  - sprite: {fileID: 21300000, guid: 123fbf9a44de4ff49bbe4f61561e0458, type: 3}
-    collider: {fileID: 0}
   - sprite: {fileID: 21300000, guid: dcb512f287d2dd14097bcb45788685df, type: 3}
     collider: {fileID: 0}
   - sprite: {fileID: 21300000, guid: 725d361d8b93b1d4d999203785e1fc91, type: 3}
     collider: {fileID: 0}
+  - sprite: {fileID: 21300000, guid: 123fbf9a44de4ff49bbe4f61561e0458, type: 3}
+    collider: {fileID: 0}
   ShouldChangeResult: 0
   ChangedResult: 3
   ActionToCycle: 0
-  actionsToMap: 050000000200000003000000
+  actionsToMap: 0200000003000000
   ActionToToggle: 0
 --- !u!212 &992570474
 SpriteRenderer:
@@ -2141,13 +2141,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  directionsToMove: 05000000020000000000000003000000
-  CompleteType: 6
+  directionsToMove: 030000000200000000000000
+  CompleteType: 5
   NumItemsToCollect: 1
   PlayerMinion: {fileID: 0}
   TimeToHold: 3
   ContinuousHold: 0
-  ShouldTriggerEvent: 1
+  ShouldTriggerEvent: 0
   eventSlots:
   - threshold: 3
     result: 1
@@ -2255,18 +2255,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpdateType: 2
   spritesToUse:
-  - sprite: {fileID: 21300000, guid: 37b3ee47bf6caff49bc1a9e36050666e, type: 3}
-    collider: {fileID: 1735953383}
   - sprite: {fileID: 21300000, guid: 7e2a1147ef954764c929bbbe4aadb7ce, type: 3}
     collider: {fileID: 1248747365}
   - sprite: {fileID: 21300000, guid: e84210ac427277541aaaf2d246033690, type: 3}
     collider: {fileID: 2099724767}
   - sprite: {fileID: 21300000, guid: 4d526134aef6a0243b31f2eea7fe23fb, type: 3}
     collider: {fileID: 2066197802}
+  - sprite: {fileID: 21300000, guid: 37b3ee47bf6caff49bc1a9e36050666e, type: 3}
+    collider: {fileID: 1735953383}
   ShouldChangeResult: 0
   ChangedResult: 0
   ActionToCycle: 4
-  actionsToMap: 05000000020000000000000003000000
+  actionsToMap: 020000000000000003000000
   ActionToToggle: 4
 --- !u!1 &1811001744
 GameObject:

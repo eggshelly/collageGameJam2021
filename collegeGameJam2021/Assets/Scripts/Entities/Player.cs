@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
         {
             if (completionFunction())
             {
+                Debug.Log(spriteResult + " " + locationResult + " " + result);
                 result = spriteResult != ResultType.None ? spriteResult : (locationResult != ResultType.None ? locationResult : ResultType.Win);
                 GameManager.GameFinished(result);
             }
@@ -230,6 +231,7 @@ public class Player : MonoBehaviour
         if (loc != null)
         {
             locationResult = loc.GetComponent<EndLocation>().GetResult();
+            StaticDelegates.PlayAudio(true);
             return true;
         }
         return false;
@@ -254,6 +256,7 @@ public class Player : MonoBehaviour
             }
 
             locationResult = closest.GetComponent<EndLocation>().GetResult();
+            StaticDelegates.PlayAudio(true);
             return true;
         }
         return false;
@@ -271,6 +274,8 @@ public class Player : MonoBehaviour
             c.gameObject.transform.parent = this.gameObject.transform;
             c.gameObject.layer = LayerMask.NameToLayer("Player");
             this.coll = c;
+
+            StaticDelegates.PlayAudio(true);
         }
 
         if (this.transform.childCount == NumItemsToCollect)
@@ -383,6 +388,7 @@ public class Player : MonoBehaviour
                 SelectKeyPressed = false;
                 counter += 1;
                 GameManager.UpdateFinalResult(ResultType.Neutral);
+                StaticDelegates.PlayAudio(true);
             }
         }
 

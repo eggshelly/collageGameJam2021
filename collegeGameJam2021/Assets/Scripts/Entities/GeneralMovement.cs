@@ -50,9 +50,12 @@ public class GeneralMovement : MonoBehaviour
     {
         StaticDelegates.UpdateMovement += ToggleMovement;
 
-
-        boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>();
-        boundary.gameObject.SetActive(false);
+        GameObject b = GameObject.FindGameObjectWithTag("Boundary");
+        if(b != null)
+        {
+            boundary = GameObject.FindGameObjectWithTag("Boundary").GetComponent<BoxCollider2D>();
+            boundary.gameObject.SetActive(false);
+        }
         collider = this.GetComponent<Collider2D>();
 
 

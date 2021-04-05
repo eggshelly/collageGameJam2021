@@ -34,7 +34,6 @@ public class UpdateSprite : MonoBehaviour
         StaticDelegates.ChangeSprite += UpdateCurrentSprite;
 
         rend = this.GetComponent<SpriteRenderer>();
-
         ToggleListeners(true);
     }
 
@@ -91,9 +90,12 @@ public class UpdateSprite : MonoBehaviour
 
     void CycleSprite(System.Action<Collider2D, ResultType> callback)
     {
+
         currentSpriteIndex = (currentSpriteIndex + 1) % spritesToUse.Count;
         rend.sprite = spritesToUse[currentSpriteIndex].GetSprite();
         SetCollider(callback, currentSpriteIndex);
+
+        StaticDelegates.PlayAudio(false);
     }
 
     void UpdateSpriteOnKey(Actions action, System.Action<Collider2D, ResultType> callback)
@@ -104,6 +106,7 @@ public class UpdateSprite : MonoBehaviour
             {
                 rend.sprite = spritesToUse[i].GetSprite();
                 SetCollider(callback, i);
+                StaticDelegates.PlayAudio(false);
             }
         }
     }
@@ -125,12 +128,18 @@ public class UpdateSprite : MonoBehaviour
                 rend.sprite = spritesToUse[actionsToMap.IndexOf(actionsStarted[actionsStarted.Count - 1])].GetSprite();
                 SetCollider(callback, actionsToMap.IndexOf(actionsStarted[actionsStarted.Count - 1]));
             }
+            StaticDelegates.PlayAudio(false);
         }
         else
         {
-            actionsStarted.Add(action);
-            rend.sprite = spritesToUse[actionsToMap.IndexOf(action)].GetSprite();
-            SetCollider(callback, actionsToMap.IndexOf(action));
+            if(actionsToMap.Contains(action))
+            {
+                actionsStarted.Add(action);
+                rend.sprite = spritesToUse[actionsToMap.IndexOf(action)].GetSprite();
+                SetCollider(callback, actionsToMap.IndexOf(action));
+                StaticDelegates.PlayAudio(false);
+            }
+  
         }
         
     }
@@ -140,7 +149,8 @@ public class UpdateSprite : MonoBehaviour
 
         if (spritesToUse[index].GetCollider() != null)
         {
-            callback(spritesToUse[index].GetCollider(), index == 0 ? ResultType.Win : ChangedResult);
+            Debug.Log(ShouldChangeResult + " " + ChangedResult);
+            callback(spritesToUse[index].GetCollider(), ShouldChangeResult ? (index == 0 ? ResultType.Win : ChangedResult) : ResultType.None);
         }
     }
 
@@ -159,7 +169,7 @@ public class UpdateSprite : MonoBehaviour
             rend.sprite = spritesToUse[1].GetSprite();
             SetCollider(callback, 1);
         }
-
+        StaticDelegates.PlayAudio(false);
     }
 
     void OnEvent()
@@ -169,6 +179,8 @@ public class UpdateSprite : MonoBehaviour
             rend.sprite = spritesToUse[currentSpriteIndex].GetSprite();
             currentSpriteIndex += 1;
         }
+
+        StaticDelegates.PlayAudio(false);
     }
 
     public ResultType CheckIfResultChanged()

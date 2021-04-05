@@ -14,14 +14,37 @@ public class AudioPlayer : MonoBehaviour
 
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
+
+        StaticDelegates.Audio += PlayAudio;
+    }
+
+    private void OnDestroy()
+    {
+        StaticDelegates.Audio -= PlayAudio;
+    }
+
+    void PlayAudio(bool isCollision)
+    {
+        if (isCollision)
+        {
+            playCollisionAudio();
+        }
+        else
+        {
+            playSpriteChangeAudio();
+        }
     }
 
     public void playCollisionAudio()
     {
-        audioSource.PlayOneShot(onCollisionClip);
+        if(onCollisionClip != null)
+            audioSource.PlayOneShot(onCollisionClip);
     }
      public void playSpriteChangeAudio()
     {
-        audioSource.PlayOneShot(onSpriteSwitchClip);
+        if (onSpriteSwitchClip != null)
+            audioSource.PlayOneShot(onSpriteSwitchClip);
     }
+
+    
 }
