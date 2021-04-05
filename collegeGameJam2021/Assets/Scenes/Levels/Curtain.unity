@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCollisionClip: {fileID: 0}
-  onSpriteSwitchClip: {fileID: 8300000, guid: 5c3e9cc25f4a9bc4686d8ff0ef2d9ffb, type: 3}
+  onSpriteSwitchClip: {fileID: 8300000, guid: 5292b7a4ad97b4b4f9f4aaa0996c8b54, type: 3}
   result: 0
 --- !u!82 &980721861
 AudioSource:
