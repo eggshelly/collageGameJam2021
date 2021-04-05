@@ -440,6 +440,8 @@ MonoBehaviour:
     possibleOutcome: 0
     type: 0
     thumbnail: {fileID: 0}
+  isLevelJunction: 0
+  levelsToLoad: []
   TimeToComplete: 50
   ResultIfTimeout: 2
 --- !u!4 &309380722

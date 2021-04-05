@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Plug.unity
     guid: 62362c30c894b884eb2e74a54d349804
   - enabled: 1
-    path: Assets/Scenes/Levels/Pen game.unity
+    path: Assets/Scenes/Levels/Uncapped.unity
     guid: 062a56db2c9098f4899b7b39fb4f3930
   - enabled: 1
     path: Assets/Scenes/Levels/CartReturn.unity

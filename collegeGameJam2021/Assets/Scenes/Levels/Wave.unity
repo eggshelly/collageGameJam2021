@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 399036604}
+  DelayBeforeBlack: 1
 --- !u!1 &399036602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1305,8 @@ MonoBehaviour:
     possibleOutcome: 0
     type: 0
     thumbnail: {fileID: 0}
+  isLevelJunction: 0
+  levelsToLoad: []
   TimeToComplete: 20
   ResultIfTimeout: 2
 --- !u!4 &1594892245
