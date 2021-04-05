@@ -24,7 +24,7 @@ public class ResultsLevelDisplay : MonoBehaviour
         CreateEntries();
         InitializeEntries();
 
-        shift = 1.0f / (levels.Count - (maxIndexOnScreen + 1));
+        shift = 1.0f / (levels.Count - 10);
 
         SetupControls();
     }
@@ -59,7 +59,7 @@ public class ResultsLevelDisplay : MonoBehaviour
 
             if (currentIndex > maxIndexOnScreen)
             {
-                rect.verticalNormalizedPosition += shift;
+                rect.verticalNormalizedPosition -= shift;
                 maxIndexOnScreen += 1;
             }
         }
@@ -72,9 +72,9 @@ public class ResultsLevelDisplay : MonoBehaviour
             levels[currentIndex].Selected(false);
             levels[--currentIndex].Selected(true);
 
-            if (currentIndex < maxIndexOnScreen - 6)
+            if (currentIndex < maxIndexOnScreen - 9)
             {
-                rect.verticalNormalizedPosition -= shift;
+                rect.verticalNormalizedPosition += shift;
                 maxIndexOnScreen -= 1;
             }
         }
