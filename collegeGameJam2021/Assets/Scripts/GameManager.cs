@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         StaticDelegates.GameState += this.UpdateGameState;
-
+        finalResult = ResultType.None;
         level = levelToPlay;
     }
 
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     public static void GameFinished(ResultType result)
     {
+        Debug.Log(result);
         finalResult = finalResult == ResultType.None ? result : (ResultType)Mathf.Min((int)finalResult, (int)result);
         Debug.Log("FINAL RESULT: " + finalResult.ToString());
         PlayerData.UpdateData(result, level);

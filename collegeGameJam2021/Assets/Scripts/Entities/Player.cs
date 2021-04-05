@@ -40,7 +40,10 @@ public class Player : MonoBehaviour
 
     System.Func<bool> completionFunction;
 
-    ResultType result = ResultType.Lose;
+    ResultType locationResult = ResultType.None;
+    ResultType spriteResult = ResultType.None;
+
+    ResultType result = ResultType.None;
     float timer = 0f;
     float eventTimer = 0f;
     int counter = 0;
@@ -72,8 +75,7 @@ public class Player : MonoBehaviour
         {
             if (completionFunction())
             {
-                if (result == ResultType.Lose)
-                    result = ResultType.Win;
+                result = spriteResult != ResultType.None ? spriteResult : (locationResult != ResultType.None ? locationResult : ResultType.Win);
                 GameManager.GameFinished(result);
             }
         }
@@ -160,8 +162,9 @@ public class Player : MonoBehaviour
         this.coll = coll;
         this.coll.enabled = true;
 
-        result = newResult == ResultType.None ? result : newResult;
+        spriteResult = newResult;
     }
+
 
     void AssignCompletionFunction()
     {
@@ -226,7 +229,7 @@ public class Player : MonoBehaviour
         Collider2D loc = Physics2D.OverlapBox(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
         if (loc != null)
         {
-            result = loc.GetComponent<EndLocation>().GetResult();
+            locationResult = loc.GetComponent<EndLocation>().GetResult();
             return true;
         }
         return false;
@@ -250,7 +253,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            result = closest.GetComponent<EndLocation>().GetResult();
+            locationResult = closest.GetComponent<EndLocation>().GetResult();
             return true;
         }
         return false;

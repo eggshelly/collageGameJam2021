@@ -140,7 +140,7 @@ public class UpdateSprite : MonoBehaviour
 
         if (spritesToUse[index].GetCollider() != null)
         {
-            callback(spritesToUse[index].GetCollider(), ChangedResult);
+            callback(spritesToUse[index].GetCollider(), index == 0 ? ResultType.Win : ChangedResult);
         }
     }
 
