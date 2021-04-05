@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartDelay: 2
-  speed: 2.5
+  speed: 5
 --- !u!4 &1379118778
 Transform:
   m_ObjectHideFlags: 0
@@ -1558,9 +1558,10 @@ MonoBehaviour:
   ContinuousHold: 0
   ShouldTriggerEvent: 0
   eventSlots: []
-  TimesToPress: 0
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!61 &1578930002
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2461,9 +2462,10 @@ MonoBehaviour:
   ContinuousHold: 0
   ShouldTriggerEvent: 0
   eventSlots: []
-  TimesToPress: 0
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!61 &2135399346
 BoxCollider2D:
   m_ObjectHideFlags: 0
