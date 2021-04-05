@@ -167,8 +167,8 @@ public class UpdateSprite : MonoBehaviour
         {
             rend.sprite = spritesToUse[1].GetSprite();
             SetCollider(callback, 1);
+            StaticDelegates.PlayAudio(false);
         }
-        StaticDelegates.PlayAudio(false);
     }
 
     void OnEvent()
