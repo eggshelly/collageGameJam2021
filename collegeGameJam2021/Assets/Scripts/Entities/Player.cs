@@ -30,11 +30,14 @@ public class Player : MonoBehaviour
     [SerializeField] List<ThresholdToResult> eventSlots;
 
     //PressKeyMultipleTimes
-    [SerializeField] int TimesToPress;
+    [SerializeField] int NumTimes;
 
     //Match Output
     [SerializeField] TMP_InputField field;
     [SerializeField] string output;
+
+    //Timing
+    [SerializeField] int TimesToMatch;
 
     bool SelectKeyPressed = false;
 
@@ -217,6 +220,10 @@ public class Player : MonoBehaviour
             case CompletionType.MatchOutput:
                 completionFunction = this.MatchOutput;
                 break;
+            case CompletionType.MoveToLocations:
+                coll = this.GetComponent<Collider2D>();
+                completionFunction = MoveToLocations;
+                break;
 
         }
     }
@@ -363,7 +370,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        if (counter >= TimesToPress)
+        if (counter >= NumTimes)
             return true;
         return false;
     }
@@ -392,7 +399,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (counter >= TimesToPress)
+        if (counter >= NumTimes)
             return true;
         return false;
     }
@@ -409,6 +416,31 @@ public class Player : MonoBehaviour
         {
             field.interactable = false;
             return true;
+        }
+        return false;
+    }
+
+    bool MoveToLocations()
+    {
+        if (coll.enabled == false)
+            return false;
+
+        Collider2D loc = Physics2D.OverlapBox(coll.bounds.center, coll.bounds.extents * 2f, this.transform.eulerAngles.z, (1 << LayerMask.NameToLayer("EndLocation")));
+        if (loc != null)
+        {
+            counter += 1;
+            Debug.Log(counter);
+            if(loc.transform.parent.GetComponent<MovingEndLocation>() != null)
+            {
+                loc.transform.parent.GetComponent<MovingEndLocation>().Overlapped();
+            }
+
+            if(counter == NumTimes)
+            {
+                spriteResult = ResultType.None;
+                locationResult = ResultType.None;
+                return true;
+            }
         }
         return false;
     }
