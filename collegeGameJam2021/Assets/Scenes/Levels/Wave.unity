@@ -1304,7 +1304,7 @@ MonoBehaviour:
   levelToPlay:
     possibleOutcome: 0
     type: 0
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: 21300000, guid: 6feb4e3df6b5dde47b8b55e34ef8e2cc, type: 3}
   isLevelJunction: 0
   levelsToLoad: []
   TimeToComplete: 20
