@@ -562,7 +562,9 @@ MonoBehaviour:
   levelToPlay:
     possibleOutcome: 0
     type: 0
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: 21300000, guid: 225cf47e47692c24bb55b3e6079ea0fd, type: 3}
+  isLevelJunction: 0
+  levelsToLoad: []
   TimeToComplete: 10
   ResultIfTimeout: 2
 --- !u!4 &309380722
@@ -1908,3 +1910,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1764602938}
+  DelayBeforeBlack: 1

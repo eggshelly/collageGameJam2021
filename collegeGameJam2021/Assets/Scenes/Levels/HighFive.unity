@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &37638873
@@ -439,7 +439,9 @@ MonoBehaviour:
   levelToPlay:
     possibleOutcome: 1
     type: 0
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: 21300000, guid: f14f72ccbd2326f45ab24efc67adc0f8, type: 3}
+  isLevelJunction: 0
+  levelsToLoad: []
   TimeToComplete: 10
   ResultIfTimeout: 2
 --- !u!4 &309380722
@@ -490,7 +492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &370414834

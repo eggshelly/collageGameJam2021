@@ -1385,7 +1385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578929997}
   m_LocalRotation: {x: 0.5, y: 0.8660254, z: -0, w: 0}
-  m_LocalPosition: {x: 2.2997, y: 0.0863, z: -1.1557429}
+  m_LocalPosition: {x: 2.2997, y: 0.0863, z: 0}
   m_LocalScale: {x: 1.1, y: 1.25, z: 1}
   m_Children:
   - {fileID: 1660719929}
@@ -1620,7 +1620,7 @@ MonoBehaviour:
   levelToPlay:
     possibleOutcome: 0
     type: 0
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: 21300000, guid: 283eff75bee8963488208191333d1c43, type: 3}
   isLevelJunction: 0
   levelsToLoad: []
   TimeToComplete: 20
@@ -1743,7 +1743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619183041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.08, y: -1.15, z: 0}
+  m_LocalPosition: {x: 13.67, y: -1.15, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2288,7 +2288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135399341}
   m_LocalRotation: {x: -0, y: -0, z: 0.5, w: 0.8660254}
-  m_LocalPosition: {x: -2.2997, y: 0.0863, z: -1.1557429}
+  m_LocalPosition: {x: -2.2997, y: 0.0863, z: 0}
   m_LocalScale: {x: 1.1, y: 1.25, z: 1}
   m_Children:
   - {fileID: 1808606170}
