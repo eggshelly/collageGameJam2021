@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         {
             if (completionFunction())
             {
+                StaticDelegates.PlayAudio(true);
                 Debug.Log(spriteResult + " " + locationResult + " " + result);
                 result = spriteResult != ResultType.None ? spriteResult : (locationResult != ResultType.None ? locationResult : ResultType.Win);
                 GameManager.GameFinished(result);
@@ -238,7 +239,6 @@ public class Player : MonoBehaviour
         if (loc != null)
         {
             locationResult = loc.GetComponent<EndLocation>().GetResult();
-            StaticDelegates.PlayAudio(true);
             return true;
         }
         return false;
@@ -263,7 +263,6 @@ public class Player : MonoBehaviour
             }
 
             locationResult = closest.GetComponent<EndLocation>().GetResult();
-            StaticDelegates.PlayAudio(true);
             return true;
         }
         return false;
@@ -395,7 +394,6 @@ public class Player : MonoBehaviour
                 SelectKeyPressed = false;
                 counter += 1;
                 GameManager.UpdateFinalResult(ResultType.Neutral);
-                StaticDelegates.PlayAudio(true);
             }
         }
 

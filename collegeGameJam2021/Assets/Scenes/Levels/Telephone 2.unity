@@ -931,16 +931,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   directionsToMove: 0000000001000000020000000300000004000000
-  CompleteType: 10
+  CompleteType: 9
   NumItemsToCollect: 3
   PlayerMinion: {fileID: 0}
   TimeToHold: 1
   ContinuousHold: 0
   ShouldTriggerEvent: 0
   eventSlots: []
-  TimesToPress: 0
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!114 &980721857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,7 +1337,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.40562618, y: -0.71390206}
