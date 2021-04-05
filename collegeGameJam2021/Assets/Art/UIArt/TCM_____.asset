@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: TCM_____
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -1718379547
   material: {fileID: 8569323079965685126}
-  materialHashCode: 0
+  materialHashCode: -685873883
   m_Version: 1.1.0
   m_SourceFontFileGUID: 1d248bd8d4dd112438ef24d94cdd253b
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 1d248bd8d4dd112438ef24d94cdd253b, type: 3}
