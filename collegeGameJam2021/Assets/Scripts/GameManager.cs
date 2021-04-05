@@ -90,14 +90,8 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings)
-        {
-            NextLevel = 0;
-        }
-        else
-        {
-            NextLevel += 1;
-        }
+        NextLevel += 1;
+
     }
 
 
@@ -107,7 +101,9 @@ public class GameManager : MonoBehaviour
             return 0;
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
-            return ++NextLevel;
+            NextLevel += 1;
+        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+            NextLevel = 0;
         return NextLevel;
     }
 
