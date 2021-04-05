@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     static Level level;
 
     [SerializeField] Level levelToPlay;
+
+    [SerializeField] bool isLevelJunction = false;
+    [SerializeField] List<ResultToLevel> levelsToLoad;
+
+
     [SerializeField] float TimeToComplete;
     [SerializeField] ResultType ResultIfTimeout = ResultType.Lose;
 
@@ -53,7 +58,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Timer ended");
             StopCoroutine(timerRoutine);
+            SetNextLevel();
         }
+
+
+
     }
 
     IEnumerator Timer()
@@ -67,20 +76,38 @@ public class GameManager : MonoBehaviour
         GameFinished(ResultIfTimeout);
     }
 
+    void SetNextLevel()
+    {
+        if(isLevelJunction && levelsToLoad.Count > 0)
+        {
+            foreach(ResultToLevel l in levelsToLoad)
+            {
+                if(l.GetResult() == finalResult)
+                {
+                    NextLevel = l.GetLevel();
+                    return;
+                }
+            }
+
+        }
+        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings)
+        {
+            NextLevel = 0;
+        }
+        else
+        {
+            NextLevel += 1;
+        }
+    }
+
 
     public static int GetNextLevel()
     {
         if (loadedFromGallery)
             return 0;
 
-        if (NextLevel + 1 == SceneManager.sceneCountInBuildSettings)
-        {
-            NextLevel = 0;
-            return 0;
-        }
-
-        CurrentLevel = NextLevel;
-        NextLevel += 1;
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            return ++NextLevel;
         return NextLevel;
     }
 
