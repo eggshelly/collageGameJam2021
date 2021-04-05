@@ -59,6 +59,9 @@ public class Player_Editor : Editor
             case CompletionType.MoveToLocationsAndSelect:
                 PressNumTimes();
                 break;
+            case CompletionType.MoveToLocations:
+                PressNumTimes();
+                break;
             case CompletionType.MatchOutput:
                 InputFieldOutput();
                 break;
@@ -103,8 +106,8 @@ public class Player_Editor : Editor
 
     void PressNumTimes()
     {
-        SerializedProperty numTimes = serializedObject.FindProperty("TimesToPress");
-        numTimes.intValue = EditorGUILayout.DelayedIntField("Times To Press", numTimes.intValue);
+        SerializedProperty numTimes = serializedObject.FindProperty("NumTimes");
+        numTimes.intValue = EditorGUILayout.DelayedIntField("Number of Times", numTimes.intValue);
     }
 
     void InputFieldOutput()
