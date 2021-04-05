@@ -86,7 +86,7 @@ public class AnimationSequence : MonoBehaviour
                 yield return swapDelay;
             }
         }
-
+        pregamePanel.gameObject.SetActive(false);
         StaticDelegates.UpdateGameState(true);
     }
 

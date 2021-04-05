@@ -1388,9 +1388,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pregamePanel: {fileID: 732561766}
   postgamePanel: {fileID: 1002423271}
-  pregame: []
+  pregame:
+  - {fileID: 21300000, guid: 1205911e3ac7a074e86500c4f5c452e9, type: 3}
   postgame: []
-  timeBetweenImageSwap: 1
+  timeBetweenImageSwap: 3
 --- !u!1 &1436280376
 GameObject:
   m_ObjectHideFlags: 0
