@@ -440,8 +440,12 @@ MonoBehaviour:
     possibleOutcome: 0
     type: 0
     thumbnail: {fileID: 21300000, guid: a4d66ca5a34f69e4cba918d018bc1fe4, type: 3}
-  isLevelJunction: 0
-  levelsToLoad: []
+  isLevelJunction: 1
+  levelsToLoad:
+  - result: 0
+    levelToLoad: 21
+  - result: 2
+    levelToLoad: 21
   TimeToComplete: 5
   ResultIfTimeout: 2
 --- !u!4 &309380722

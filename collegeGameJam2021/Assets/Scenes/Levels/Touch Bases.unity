@@ -629,9 +629,10 @@ MonoBehaviour:
   ContinuousHold: 0
   ShouldTriggerEvent: 0
   eventSlots: []
-  TimesToPress: 0
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!114 &560891710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,7 +980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &850045129
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1652,11 +1653,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelToPlay:
     possibleOutcome: 0
-    type: 0
+    type: 1
     thumbnail: {fileID: 21300000, guid: 18fcafae9eaafab45bb6be0f16dfb778, type: 3}
   isLevelJunction: 0
   levelsToLoad: []
-  TimeToComplete: 20
+  TimeToComplete: 12
   ResultIfTimeout: 2
 --- !u!4 &1594892245
 Transform:

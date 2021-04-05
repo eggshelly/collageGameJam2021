@@ -9,33 +9,75 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: f2f6708c6a57cfc4985e8e8402b419b4
   - enabled: 1
-    path: Assets/Scenes/Levels/HighFive.unity
+    path: Assets/Scenes/Levels/High Five.unity
     guid: 110071e84f20f1f4c8a0267c41c4931a
   - enabled: 1
     path: Assets/Scenes/Levels/Plug.unity
     guid: 62362c30c894b884eb2e74a54d349804
   - enabled: 1
-    path: Assets/Scenes/Levels/Uncapped.unity
-    guid: 062a56db2c9098f4899b7b39fb4f3930
-  - enabled: 1
-    path: Assets/Scenes/Levels/Cart Return.unity
-    guid: d9f624c3ec879ee43afd1ea9ec0b4a90
-  - enabled: 1
-    path: Assets/Scenes/Levels/Confession.unity
-    guid: 6046f1f13bdc9984793a6926ea2eb0cb
+    path: Assets/Scenes/Levels/Handshake.unity
+    guid: b2d1c9e0d48a0f34db60d27c6a94315f
   - enabled: 1
     path: Assets/Scenes/Levels/Construction.unity
     guid: 37cef2e4d9ad40944b02467fd6565d96
   - enabled: 1
+    path: Assets/Scenes/Levels/Umbrella.unity
+    guid: df858e15f1b8a524dada77807f976940
+  - enabled: 1
     path: Assets/Scenes/Levels/Dongle.unity
     guid: 254d055df29d5c34ca0194163dbab91e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Telephone 1.unity
+    guid: af567879ea61b1e48846af94cb0d1f0d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Drawbridge.unity
+    guid: ad39d52d6f08ad9429c3b879f01c8db0
+  - enabled: 1
+    path: Assets/Scenes/Levels/Uncapped.unity
+    guid: 062a56db2c9098f4899b7b39fb4f3930
+  - enabled: 1
+    path: Assets/Scenes/Levels/Confession.unity
+    guid: 6046f1f13bdc9984793a6926ea2eb0cb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Telephone 2.unity
+    guid: 14819f3d13f09534898d7434d996747d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Curtain.unity
+    guid: fe2ea4a16bfccc944911bfa888096166
+  - enabled: 1
+    path: Assets/Scenes/Levels/Grounded.unity
+    guid: af5cd398bf3c4dd4fa051103529261ee
+  - enabled: 1
+    path: Assets/Scenes/Levels/Pasta.unity
+    guid: 3ff4bd44b627e9245a3bec093b5321e5
+  - enabled: 1
+    path: Assets/Scenes/Levels/Synapse.unity
+    guid: e32e6fa29be021745ba7d45ca2e0c485
+  - enabled: 1
+    path: Assets/Scenes/Levels/Wave.unity
+    guid: 0f67ee0e474ff394a873c4d064be4069
+  - enabled: 1
+    path: Assets/Scenes/Levels/Bridge.unity
+    guid: 4b8e35f5e94d357438848f32dfeb792e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Proposal.unity
+    guid: e78a0521f73cf0a489ce09c04b357f46
+  - enabled: 1
+    path: Assets/Scenes/Levels/Pet.unity
+    guid: d000f509ed53dc64e990b5032d8df26b
   - enabled: 1
     path: Assets/Scenes/Levels/Dowel.unity
     guid: 755b095cd9da6d74897ae61d910a09a3
   - enabled: 1
-    path: Assets/Scenes/Levels/Handshake.unity
-    guid: b2d1c9e0d48a0f34db60d27c6a94315f
+    path: Assets/Scenes/Levels/Yoga.unity
+    guid: 46dc959d17896184d962bf675e853e6d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Touch Bases.unity
+    guid: 9fa08745e9d18a847ae7d61faac05e34
   - enabled: 1
     path: Assets/Scenes/Results.unity
     guid: 03957a746ec5cf249b8a83e0de9b0938
+  - enabled: 0
+    path: Assets/Scenes/Levels/Cart Return.unity
+    guid: d9f624c3ec879ee43afd1ea9ec0b4a90
   m_configObjects: {}

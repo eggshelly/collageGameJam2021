@@ -1914,11 +1914,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelToPlay:
-    possibleOutcome: 0
+    possibleOutcome: 1
     type: 0
     thumbnail: {fileID: 21300000, guid: 494e6bb70c7a99f4282c613ec0ca6722, type: 3}
-  isLevelJunction: 0
-  levelsToLoad: []
+  isLevelJunction: 1
+  levelsToLoad:
+  - result: 0
+    levelToLoad: 23
+  - result: 1
+    levelToLoad: 23
+  - result: 2
+    levelToLoad: 23
   TimeToComplete: 12
   ResultIfTimeout: 2
 --- !u!4 &1594892245
