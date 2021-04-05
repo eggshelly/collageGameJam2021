@@ -438,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelToPlay:
     possibleOutcome: 1
-    type: 0
+    type: 1
     thumbnail: {fileID: 21300000, guid: f14f72ccbd2326f45ab24efc67adc0f8, type: 3}
   isLevelJunction: 0
   levelsToLoad: []
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   UpdateType: 0
   spritesToUse:
   - sprite: {fileID: 21300000, guid: d3d6e35de3c5ce243a5a41ca5bcf3a83, type: 3}
-    collider: {fileID: 0}
+    collider: {fileID: 980721854}
   - sprite: {fileID: 21300000, guid: be9834f715a036c49ba136652523ae20, type: 3}
     collider: {fileID: 1529741307}
   - sprite: {fileID: 21300000, guid: e396bb8ecb9e4894a940ea8c844a8f2e, type: 3}
