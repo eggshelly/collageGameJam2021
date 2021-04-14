@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 399036604}
+  DelayBeforeBlack: 1
 --- !u!1 &399036602
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,8 +383,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '#01'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -809,8 +810,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spread The Bread
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1054,6 +1055,8 @@ MonoBehaviour:
     possibleOutcome: 0
     type: 0
     thumbnail: {fileID: 0}
+  isLevelJunction: 0
+  levelsToLoad: []
   TimeToComplete: 20
   ResultIfTimeout: 2
 --- !u!4 &1594892245
@@ -1352,9 +1355,10 @@ MonoBehaviour:
     result: 1
   - threshold: 6
     result: 0
-  TimesToPress: 5
+  NumTimes: 0
   field: {fileID: 0}
   output: 
+  TimesToMatch: 0
 --- !u!114 &1735953381
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -293,7 +293,7 @@ RectTransform:
   m_Children:
   - {fileID: 399036603}
   m_Father: {fileID: 1366311231}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -448,8 +448,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '#01'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -975,8 +975,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spread The Bread
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1250,8 +1250,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1811001745}
-  - {fileID: 309317761}
   - {fileID: 1900872555}
+  - {fileID: 309317761}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1751,7 +1751,7 @@ MonoBehaviour:
     thumbnail: {fileID: 21300000, guid: 283eff75bee8963488208191333d1c43, type: 3}
   isLevelJunction: 0
   levelsToLoad: []
-  TimeToComplete: 20
+  TimeToComplete: 12
   ResultIfTimeout: 2
 --- !u!4 &1594892245
 Transform:
@@ -2165,7 +2165,7 @@ RectTransform:
   - {fileID: 1005355473}
   - {fileID: 1517418664}
   m_Father: {fileID: 1366311231}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

@@ -417,8 +417,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '#01'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1053,8 +1053,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spread The Bread
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1654,7 +1654,7 @@ MonoBehaviour:
     thumbnail: {fileID: 21300000, guid: 9b3d3a344d91ee84a93e65a2695a4da1, type: 3}
   isLevelJunction: 0
   levelsToLoad: []
-  TimeToComplete: 12
+  TimeToComplete: 10
   ResultIfTimeout: 2
 --- !u!4 &1594892245
 Transform:

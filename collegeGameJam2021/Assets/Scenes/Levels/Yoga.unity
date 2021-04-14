@@ -783,8 +783,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '#01'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1615,8 +1615,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spread The Bread
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
+  m_sharedMaterial: {fileID: 8569323079965685126, guid: 5b53a918f56d6384da7cf66e2d6f652f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2370,8 +2370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCollisionClip: {fileID: 0}
-  onSpriteSwitchClip: {fileID: 0}
-  result: 0
+  onSpriteSwitchClip: {fileID: 8300000, guid: 33eb37599cb68d34aae76bb94d454bac, type: 3}
+  result: 3
 --- !u!82 &1735953386
 AudioSource:
   m_ObjectHideFlags: 0
